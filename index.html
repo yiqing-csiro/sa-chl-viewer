@@ -66,8 +66,10 @@
       }
       const canvas = document.getElementById("colorbar");
       const ctx = canvas.getContext("2d");
+      const gamma = 3;
       for (let px = 0; px < canvas.width; px++) {
-        const rgb = turbo(px / (canvas.width - 1));
+        const normalized = px / (canvas.width - 1);
+        const rgb = turbo(Math.pow(normalized, 1 / gamma));
         ctx.fillStyle = `rgb(${rgb.join(",")})`;
         ctx.fillRect(px, 0, 1, canvas.height);
       }
