@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-26T00:00:00+00:00",
+  "history_product": "inpainted",
+  "history_weeks": 52,
+  "forecast_weeks": 4,
+  "forecast_origin": "2026-08-17",
+  "first_date": "2025-08-25",
+  "last_date": "2026-09-14",
+  "entries": [
+    {
+      "date": "2025-08-25",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-08-25.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-08-25.tif",
+      "checksum": "4b3f4b75ede870d81b569f6ca365692cd4487563a6794301246a03b055156509",
+      "size_bytes": 7404206
+    },
+    {
+      "date": "2025-09-01",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-09-01.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-09-01.tif",
+      "checksum": "8cba16b314115247b89f98eb44ce6940fb388a610b66ae9df42206ffef89ccbc",
+      "size_bytes": 7193409
+    },
+    {
+      "date": "2025-09-08",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-09-08.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-09-08.tif",
+      "checksum": "270e4d7c8bdb6a6c09c82067e72646e472331f9cd942c49fd8963e32125b4088",
+      "size_bytes": 7038794
+    },
+    {
+      "date": "2025-09-15",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-09-15.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-09-15.tif",
+      "checksum": "1d9882413ef42c44f62bfa24dfc26fdebedaacf02b1c2b1545c7222ae4756492",
+      "size_bytes": 7244725
+    },
+    {
+      "date": "2025-09-22",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-09-22.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-09-22.tif",
+      "checksum": "9235b7abe36cb63d11778ccca8b5fec8ee655b5567d131ecaa8f447aaaba86aa",
+      "size_bytes": 7407759
+    },
+    {
+      "date": "2025-09-29",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-09-29.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-09-29.tif",
+      "checksum": "11c053a82c5c840b8949b2f84e97cd04927187e4b46a09d6b16ca7bc2e100fed",
+      "size_bytes": 7286835
+    },
+    {
+      "date": "2025-10-06",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-10-06.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-10-06.tif",
+      "checksum": "b33716e29321da5de904e308fbb7be0aa42be345b61c6410d67ca5e9eb9692c9",
+      "size_bytes": 7459317
+    },
+    {
+      "date": "2025-10-13",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-10-13.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-10-13.tif",
+      "checksum": "e6698da999f7f64d7cda7cc3ccd66c7f9d221c2289c7b0eee184d8f035a04e6e",
+      "size_bytes": 6764205
+    },
+    {
+      "date": "2025-10-20",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-10-20.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-10-20.tif",
+      "checksum": "d90a0f7773e0c075a6e62316254605e6fbec60d38247d29aef197339fe21e720",
+      "size_bytes": 7492728
+    },
+    {
+      "date": "2025-10-27",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-10-27.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-10-27.tif",
+      "checksum": "297a4e2e3ed1a15f4006ea19b0f8408e7e1f1b80e2df87d4ed61856ef5353f1e",
+      "size_bytes": 7481669
+    },
+    {
+      "date": "2025-11-03",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-11-03.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-11-03.tif",
+      "checksum": "d332cc96969cb44ad54cc2816f9f8edea7a5249b82eb066bc8b1899f49aee274",
+      "size_bytes": 7561557
+    },
+    {
+      "date": "2025-11-10",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-11-10.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-11-10.tif",
+      "checksum": "b20b7d38cc4704399157a5093ec656176a84affcec27bc5795a2617d95fdfde2",
+      "size_bytes": 7375703
+    },
+    {
+      "date": "2025-11-17",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-11-17.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-11-17.tif",
+      "checksum": "ead3fdff48814aa688b13a280521ae5750baa1556a14ef759809cf3642be9cf2",
+      "size_bytes": 7468383
+    },
+    {
+      "date": "2025-11-24",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-11-24.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-11-24.tif",
+      "checksum": "3137530e6b4e3ed18b63c8d87dade9005d0826fce034b537b8aa87d67eb60579",
+      "size_bytes": 7386497
+    },
+    {
+      "date": "2025-12-01",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-12-01.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-12-01.tif",
+      "checksum": "a9096cbe58bdde439e65b1921781fe8dddbc93f09a6e71774e4435deadbf0080",
+      "size_bytes": 6801219
+    },
+    {
+      "date": "2025-12-08",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-12-08.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-12-08.tif",
+      "checksum": "c20491bcc3f91bed7c0f08b29ba504c530ef9ecdebefa957559f616ad7aa7e46",
+      "size_bytes": 6782816
+    },
+    {
+      "date": "2025-12-15",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-12-15.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-12-15.tif",
+      "checksum": "8c492b12d3f80c0c83820d4ce1a103033c4d744dfb75d801e44770afad486c5a",
+      "size_bytes": 7186767
+    },
+    {
+      "date": "2025-12-22",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-12-22.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-12-22.tif",
+      "checksum": "37a10a9ace6ec506c96e28f97f160a47dcfd80c1dba5b00f27ff81b2c3ccfec3",
+      "size_bytes": 6713488
+    },
+    {
+      "date": "2025-12-29",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2025-12-29.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-12-29.tif",
+      "checksum": "8b3e685dda696b822e9d8ea2442039df98da4f305b72c65ac21a1f2fe1d36dfd",
+      "size_bytes": 7609078
+    },
+    {
+      "date": "2026-01-05",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-01-05.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-01-05.tif",
+      "checksum": "8a9319b326b0b4bd3f3b70987093f0bc333787fb193dd3f0fd74795fd8210246",
+      "size_bytes": 6828365
+    },
+    {
+      "date": "2026-01-12",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-01-12.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-01-12.tif",
+      "checksum": "d3716d8470aad70f1ca34a4334efa5f254bc0bebe6767ff70a1f80ced756fcb9",
+      "size_bytes": 7478453
+    },
+    {
+      "date": "2026-01-19",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-01-19.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-01-19.tif",
+      "checksum": "2b9638d2f2b9a5d4d093ded119348c32f4d65ca6dd6ca7c80235ea00433fa3cc",
+      "size_bytes": 6998634
+    },
+    {
+      "date": "2026-01-26",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-01-26.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-01-26.tif",
+      "checksum": "1dbc5947403109b22b98efd51e8cdd9ee2ff7e23a4e51396ddcab4b0a4101e7a",
+      "size_bytes": 7332839
+    },
+    {
+      "date": "2026-02-02",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-02-02.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-02-02.tif",
+      "checksum": "0256289e2b4d6f8acf98cd739357911adb465ad896d43dcc2a4a52d82be3bdc7",
+      "size_bytes": 6963706
+    },
+    {
+      "date": "2026-02-09",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-02-09.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-02-09.tif",
+      "checksum": "85344c169b89b736b898740d6078af8dd09495a9d12289f2ea1cd7964dfc55c1",
+      "size_bytes": 6896471
+    },
+    {
+      "date": "2026-02-16",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-02-16.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-02-16.tif",
+      "checksum": "0da3772e1420250da096bff43b5c6033372aec9fd1227878c7bfe611bbe718dc",
+      "size_bytes": 7052455
+    },
+    {
+      "date": "2026-02-23",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-02-23.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-02-23.tif",
+      "checksum": "9f1a508e51f64d6d13a830dfbc542e694f057053c745612ac31ce85a76c68e2f",
+      "size_bytes": 7470601
+    },
+    {
+      "date": "2026-03-02",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-03-02.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-03-02.tif",
+      "checksum": "9b8fa99ef6300f0daac287e49f7694990d04bb334c99e7d300eeb3240a963a23",
+      "size_bytes": 7673261
+    },
+    {
+      "date": "2026-03-09",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-03-09.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-03-09.tif",
+      "checksum": "0d1280457d00d157dfbbccab0827bcb0dc4eb698a08de3fe0ac27672bf3c0fb5",
+      "size_bytes": 7661617
+    },
+    {
+      "date": "2026-03-16",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-03-16.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-03-16.tif",
+      "checksum": "4767f2285b1f95ec36fb055fdb6341faca2010c5208325634deb96b9db64ae40",
+      "size_bytes": 7661236
+    },
+    {
+      "date": "2026-03-23",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-03-23.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-03-23.tif",
+      "checksum": "9fc4eaf14c68a0f5249dce70ae31bee9b51275a79d972a2f1788792d67e7b792",
+      "size_bytes": 7673417
+    },
+    {
+      "date": "2026-03-30",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-03-30.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-03-30.tif",
+      "checksum": "97984e0793198b63092736e0d07a74eda80b121c12a3ef9f5746c3633c92dff8",
+      "size_bytes": 7685221
+    },
+    {
+      "date": "2026-04-06",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-04-06.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-04-06.tif",
+      "checksum": "2012d4036b5e5e782cbe355082ccf8cb664c4b0006e72be81595f2ebb09c1fb4",
+      "size_bytes": 7648518
+    },
+    {
+      "date": "2026-04-13",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-04-13.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-04-13.tif",
+      "checksum": "e53540adc1c91fe405f7483dff129d3f43747331ac7fa8d4e07fab99c20e540a",
+      "size_bytes": 7657735
+    },
+    {
+      "date": "2026-04-20",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-04-20.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-04-20.tif",
+      "checksum": "a368683038ceb3aff667f85e2aa4f11b974a535fc66055cb4dee402a1ea45c1d",
+      "size_bytes": 7667229
+    },
+    {
+      "date": "2026-04-27",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-04-27.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-04-27.tif",
+      "checksum": "bac02cee02a3809fd81e8f23e916f419e500746c50cee87bec2d7a827f6b119f",
+      "size_bytes": 7621210
+    },
+    {
+      "date": "2026-05-04",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-05-04.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-05-04.tif",
+      "checksum": "e9057d777ab35d741731912172aa3c14e3ef4d254473b27ccfcf310c10be0cc3",
+      "size_bytes": 7592730
+    },
+    {
+      "date": "2026-05-11",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-05-11.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-05-11.tif",
+      "checksum": "6b435f6ec7c1a57f0b5bd795168451aa382c48041f6691433733cdceb4b73629",
+      "size_bytes": 7593757
+    },
+    {
+      "date": "2026-05-18",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-05-18.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-05-18.tif",
+      "checksum": "a7f8ea9ba5878cc835f91c809319419994f732a4ce87b3d71ab9768960c38beb",
+      "size_bytes": 7588071
+    },
+    {
+      "date": "2026-05-25",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-05-25.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-05-25.tif",
+      "checksum": "d4fd04f50926e61a089b8e17c7d19f9c67cda45597538b54ae170461772f96b1",
+      "size_bytes": 7595189
+    },
+    {
+      "date": "2026-06-01",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-06-01.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-06-01.tif",
+      "checksum": "73ac3f5dc6fa41ec2c9b878601b1277f141080e72d4119f78d44deb825361b3c",
+      "size_bytes": 7587063
+    },
+    {
+      "date": "2026-06-08",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-06-08.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-06-08.tif",
+      "checksum": "9ec0333ccd611216f10548bcfe9957b0b0a569363629ffef32a101e350b5e62c",
+      "size_bytes": 7594988
+    },
+    {
+      "date": "2026-06-15",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-06-15.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-06-15.tif",
+      "checksum": "9de60ae32b9a1c4ded86561b62fe3eda8ac9869b2ce0b060ecf229aefc65e3e2",
+      "size_bytes": 7566978
+    },
+    {
+      "date": "2026-06-22",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-06-22.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-06-22.tif",
+      "checksum": "8b597650859c692672d8ad9cfec28e0ceee70c5aabb19059f0780dd9715b5464",
+      "size_bytes": 7579384
+    },
+    {
+      "date": "2026-06-29",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-06-29.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-06-29.tif",
+      "checksum": "7ba3db130a90b8b1c46295db02f6af6c4bbf5e6492f0199602a4d8f5e3c700e6",
+      "size_bytes": 7586750
+    },
+    {
+      "date": "2026-07-06",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-07-06.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-06.tif",
+      "checksum": "38dff4c8067f189d95bdd0e5934ed72b450b98523b6607daa102f4bc9d307a42",
+      "size_bytes": 7588155
+    },
+    {
+      "date": "2026-07-13",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-07-13.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-13.tif",
+      "checksum": "2094928af0327ebb131edd0886819841e6a8cabac95e8a1967d193ec2c2a1cbd",
+      "size_bytes": 7594229
+    },
+    {
+      "date": "2026-07-20",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-07-20.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-20.tif",
+      "checksum": "0b1c12ad5d42da40285077c3ea38def83144e65bda4ba65c4bb7668260defddb",
+      "size_bytes": 7589801
+    },
+    {
+      "date": "2026-07-27",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-07-27.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-27.tif",
+      "checksum": "a8f1fd5dce4295650669e668de157f83cc0130320437185911954feef1124333",
+      "size_bytes": 7606118
+    },
+    {
+      "date": "2026-08-03",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-08-03.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-03.tif",
+      "checksum": "1af8ca5a0da3df9ac588f51f79a86b995fea5e128c3de554b975a5205658e736",
+      "size_bytes": 7580899
+    },
+    {
+      "date": "2026-08-10",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-08-10.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-10.tif",
+      "checksum": "aff3e53395b302fdeb9e417e90e5a75b88d50b0e75e1e49a55e8e85cb6f2784f",
+      "size_bytes": 7589847
+    },
+    {
+      "date": "2026-08-17",
+      "kind": "inpainted",
+      "lead_weeks": null,
+      "units": "mg m-3",
+      "path": "frames/2026-08-17.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-17.tif",
+      "checksum": "b2ccef4332cf48532db79de2f01f2024c022d464914963ce3b48e4810b28c5f5",
+      "size_bytes": 7537049
+    },
+    {
+      "date": "2026-08-24",
+      "kind": "forecast",
+      "lead_weeks": 1,
+      "units": "mg m-3",
+      "path": "frames/2026-08-24.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-24.tif",
+      "checksum": "058648cdba942695b78b1d582bbc54ce990b8b8e22b3b5ac5cb268a93e23e146",
+      "size_bytes": 7565590
+    },
+    {
+      "date": "2026-08-31",
+      "kind": "forecast",
+      "lead_weeks": 2,
+      "units": "mg m-3",
+      "path": "frames/2026-08-31.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-31.tif",
+      "checksum": "849b6c44e43cc0346d6707d55b4e87a62e96b87fd4fa38daa4c8c9a7ac35269a",
+      "size_bytes": 7572319
+    },
+    {
+      "date": "2026-09-07",
+      "kind": "forecast",
+      "lead_weeks": 3,
+      "units": "mg m-3",
+      "path": "frames/2026-09-07.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-07.tif",
+      "checksum": "74896f190bc6b8cc233fb46b1675c9782bf1c9698260fde405a2600d009a5b4b",
+      "size_bytes": 7577799
+    },
+    {
+      "date": "2026-09-14",
+      "kind": "forecast",
+      "lead_weeks": 4,
+      "units": "mg m-3",
+      "path": "frames/2026-09-14.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-14.tif",
+      "checksum": "3881a972b4a3659329d3bed191669bf66eff8c55549977ba01d7b657883d89f5",
+      "size_bytes": 7585436
+    }
+  ]
+}

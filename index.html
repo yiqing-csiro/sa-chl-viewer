@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="South Australian coastal chlorophyll history and forecast">
+    <title>SA Coastal Chlorophyll Forecast</title>
+    <style>
+      :root { color-scheme: light; font-family: Inter, Arial, sans-serif; }
+      * { box-sizing: border-box; }
+      html, body, #map { width: 100%; height: 100%; margin: 0; }
+      body { overflow: hidden; background: #dce7ec; }
+      #map { position: absolute; inset: 0; border: 0; }
+      .card {
+        position: absolute; z-index: 2; color: #17313a; background: rgba(255,255,255,.94);
+        border: 1px solid rgba(23,49,58,.16); border-radius: 10px;
+        box-shadow: 0 3px 16px rgba(16,39,48,.18); backdrop-filter: blur(5px);
+      }
+      #status { top: 16px; left: 16px; max-width: min(390px, calc(100vw - 32px)); padding: 13px 15px; }
+      h1 { margin: 0 0 6px; font-size: 18px; line-height: 1.25; }
+      #summary { margin: 0; font-size: 13px; line-height: 1.45; }
+      #updated { margin-top: 5px; color: #536b74; font-size: 11px; }
+      #legend { right: 16px; bottom: 96px; width: 245px; padding: 10px 12px; }
+      .legend-title { margin-bottom: 7px; font-size: 13px; font-weight: 700; }
+      #colorbar { display: block; width: 100%; height: 18px; border-radius: 3px; }
+      .ticks { display: flex; justify-content: space-between; margin-top: 3px; font-size: 10px; }
+      .unit { margin-top: 4px; text-align: center; font-size: 11px; }
+      .key { display: flex; gap: 12px; margin-top: 8px; font-size: 11px; }
+      .key span::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; }
+      .history::before { background: #168aad; }
+      .forecast::before { background: #d95f02; }
+      #error { display: none; color: #a02020; }
+      @media (max-width: 620px) {
+        #status { top: 8px; left: 8px; max-width: calc(100vw - 16px); }
+        #legend { right: 8px; bottom: 88px; width: 210px; }
+        h1 { font-size: 15px; }
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="map" title="GeoLibre South Australian chlorophyll map" allowfullscreen></iframe>
+    <section id="status" class="card" aria-live="polite">
+      <h1>SA Coastal Chlorophyll Forecast</h1>
+      <p id="summary">Loading the latest 52-week history and four-week forecast…</p>
+      <div id="updated"></div>
+      <div id="error"></div>
+    </section>
+    <section id="legend" class="card" aria-label="Chlorophyll colour scale">
+      <div class="legend-title">Chlorophyll-a concentration</div>
+      <canvas id="colorbar" width="600" height="36"></canvas>
+      <div class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
+      <div class="unit">mg m<sup>−3</sup></div>
+      <div class="key"><span class="history">Inpainted</span><span class="forecast">Forecast</span></div>
+    </section>
+    <script>
+      function turbo(x) {
+        const c = [
+          [0.13572138,4.6153926,-42.66032258,132.13108234,-152.94239396,59.28637943],
+          [0.09140261,2.19418839,4.84296658,-14.18503333,4.27729857,2.82956604],
+          [0.1066733,12.64194608,-60.58204836,110.36276771,-89.90310912,27.34824973]
+        ];
+        x = Math.max(0, Math.min(1, x));
+        return c.map(k => Math.round(255 * Math.max(0, Math.min(1,
+          k[0] + x*(k[1] + x*(k[2] + x*(k[3] + x*(k[4] + x*k[5]))))
+        ))));
+      }
+      const canvas = document.getElementById("colorbar");
+      const ctx = canvas.getContext("2d");
+      for (let px = 0; px < canvas.width; px++) {
+        const rgb = turbo(Math.pow(px / (canvas.width - 1), 1 / 3));
+        ctx.fillStyle = `rgb(${rgb.join(",")})`;
+        ctx.fillRect(px, 0, 1, canvas.height);
+      }
+
+      async function start() {
+        try {
+          const response = await fetch(`release.json?v=${Date.now()}`, {cache: "no-store"});
+          if (!response.ok) throw new Error(`release.json returned ${response.status}`);
+          const release = await response.json();
+          const project = new URL("sa-chl.geolibre.json", location.href);
+          project.searchParams.set("v", release.generated_at_utc);
+          const viewer = new URL("https://web.geolibre.app/");
+          viewer.searchParams.set("url", project.href);
+          viewer.searchParams.set("maponly", "");
+          document.getElementById("map").src = viewer.href;
+          document.getElementById("summary").textContent =
+            `${release.first_date} to ${release.forecast_origin}: inpainted history. ` +
+            `${release.entries[52].date} to ${release.last_date}: forecast.`;
+          document.getElementById("updated").textContent =
+            `Updated ${new Date(release.generated_at_utc).toLocaleString("en-AU", {timeZone: "Australia/Brisbane"})} AEST`;
+        } catch (error) {
+          document.getElementById("summary").textContent = "The map configuration could not be loaded.";
+          const target = document.getElementById("error");
+          target.style.display = "block";
+          target.textContent = String(error);
+        }
+      }
+      start();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+{
+  "version": "0.2.0",
+  "name": "South Australian coastal chlorophyll forecast",
+  "mapView": {
+    "center": [
+      137.0,
+      -34.5
+    ],
+    "zoom": 6.4,
+    "bearing": 0,
+    "pitch": 0,
+    "bbox": [
+      134.0,
+      -37.0,
+      140.0,
+      -32.0
+    ]
+  },
+  "basemapStyleUrl": "https://tiles.openfreemap.org/styles/liberty",
+  "basemapVisible": true,
+  "basemapOpacity": 1,
+  "layers": [],
+  "selectedLayerId": null,
+  "styles": {},
+  "preferences": {
+    "map": {
+      "restrictBounds": false,
+      "bounds": [
+        -180,
+        -85,
+        180,
+        85
+      ],
+      "minZoom": 0,
+      "maxZoom": 24,
+      "maxPitch": 85,
+      "renderWorldCopies": true,
+      "projection": "mercator",
+      "ellipsoidId": "earth",
+      "scaleUnit": "metric",
+      "showPointerElevation": false,
+      "coordinateFormat": "dd"
+    },
+    "environmentVariables": [],
+    "geocoding": {
+      "providerId": "nominatim",
+      "apiKeys": {}
+    }
+  },
+  "plugins": {
+    "manifestUrls": [],
+    "activePluginIds": [
+      "maplibre-gl-time-slider"
+    ],
+    "mapControlPositions": {
+      "maplibre-gl-time-slider": "bottom-left"
+    },
+    "settings": {
+      "maplibre-gl-time-slider": {
+        "startDate": "2025-08-25",
+        "endDate": "2026-09-14",
+        "currentDate": "2026-08-17",
+        "dates": [
+          "2025-08-25",
+          "2025-09-01",
+          "2025-09-08",
+          "2025-09-15",
+          "2025-09-22",
+          "2025-09-29",
+          "2025-10-06",
+          "2025-10-13",
+          "2025-10-20",
+          "2025-10-27",
+          "2025-11-03",
+          "2025-11-10",
+          "2025-11-17",
+          "2025-11-24",
+          "2025-12-01",
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22",
+          "2025-12-29",
+          "2026-01-05",
+          "2026-01-12",
+          "2026-01-19",
+          "2026-01-26",
+          "2026-02-02",
+          "2026-02-09",
+          "2026-02-16",
+          "2026-02-23",
+          "2026-03-02",
+          "2026-03-09",
+          "2026-03-16",
+          "2026-03-23",
+          "2026-03-30",
+          "2026-04-06",
+          "2026-04-13",
+          "2026-04-20",
+          "2026-04-27",
+          "2026-05-04",
+          "2026-05-11",
+          "2026-05-18",
+          "2026-05-25",
+          "2026-06-01",
+          "2026-06-08",
+          "2026-06-15",
+          "2026-06-22",
+          "2026-06-29",
+          "2026-07-06",
+          "2026-07-13",
+          "2026-07-20",
+          "2026-07-27",
+          "2026-08-03",
+          "2026-08-10",
+          "2026-08-17",
+          "2026-08-24",
+          "2026-08-31",
+          "2026-09-07",
+          "2026-09-14"
+        ],
+        "interval": 1,
+        "granularity": "day",
+        "granularities": [
+          "day"
+        ],
+        "speed": 800,
+        "loop": true,
+        "autoPlay": false,
+        "theme": "light",
+        "dateFormat": "YYYY MMM DD",
+        "collapsed": false,
+        "sources": [
+          {
+            "id": "sa-chlorophyll-weekly",
+            "type": "xyz",
+            "name": "Chlorophyll-a: inpainted history and forecast",
+            "tiles": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F{date:YYYY-MM-DD}.tif&rescale=0%2C20&colormap_name=turbo&color_formula=Gamma%20RGB%203&nodata=-9999&return_mask=true",
+            "tileSize": 256,
+            "opacity": 1,
+            "bounds": [
+              134.0,
+              -37.0,
+              140.0,
+              -32.0
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "legend": {
+    "title": "Chlorophyll-a (mg m\u207b\u00b3)",
+    "groupByLayer": true,
+    "order": [],
+    "overrides": {}
+  },
+  "metadata": {
+    "history_product": "inpainted",
+    "history_weeks": 52,
+    "forecast_weeks": 4,
+    "forecast_origin": "2026-08-17",
+    "generated_at_utc": "2026-08-26T00:00:00+00:00"
+  }
+}
