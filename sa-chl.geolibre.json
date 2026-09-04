@@ -134,7 +134,7 @@
             "id": "sa-chlorophyll-weekly",
             "type": "xyz",
             "name": "Chlorophyll-a: inpainted history and forecast",
-            "tiles": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F{date:YYYY-MM-DD}.tif&rescale=0%2C20&colormap_name=turbo&color_formula=Gamma%20RGB%203&nodata=-9999&return_mask=true",
+            "tiles": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F{date:YYYY-MM-DD}.tif&rescale=0%2C20&colormap_name=turbo&nodata=-9999&return_mask=true",
             "tileSize": 256,
             "opacity": 1,
             "bounds": [
