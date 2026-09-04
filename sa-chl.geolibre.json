@@ -57,11 +57,10 @@
     },
     "settings": {
       "maplibre-gl-time-slider": {
-        "startDate": "2025-08-25",
-        "endDate": "2026-09-14",
-        "currentDate": "2026-08-17",
+        "startDate": "2025-09-01",
+        "endDate": "2026-09-21",
+        "currentDate": "2026-08-24",
         "dates": [
-          "2025-08-25",
           "2025-09-01",
           "2025-09-08",
           "2025-09-15",
@@ -116,7 +115,8 @@
           "2026-08-24",
           "2026-08-31",
           "2026-09-07",
-          "2026-09-14"
+          "2026-09-14",
+          "2026-09-21"
         ],
         "interval": 1,
         "granularity": "day",
@@ -158,7 +158,7 @@
     "history_product": "inpainted",
     "history_weeks": 52,
     "forecast_weeks": 4,
-    "forecast_origin": "2026-08-17",
-    "generated_at_utc": "2026-08-26T00:00:00+00:00"
+    "forecast_origin": "2026-08-24",
+    "generated_at_utc": "2026-09-04T07:26:17.879054+00:00"
   }
 }
