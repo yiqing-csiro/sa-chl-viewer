@@ -1,23 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-09-04T07:26:17.879054+00:00",
+  "generated_at_utc": "2026-09-06T22:27:47.747921+00:00",
   "history_product": "inpainted",
   "history_weeks": 52,
   "forecast_weeks": 4,
-  "forecast_origin": "2026-08-24",
-  "first_date": "2025-09-01",
-  "last_date": "2026-09-21",
+  "forecast_origin": "2026-08-31",
+  "first_date": "2025-09-08",
+  "last_date": "2026-09-28",
   "entries": [
-    {
-      "date": "2025-09-01",
-      "kind": "inpainted",
-      "lead_weeks": null,
-      "units": "mg m-3",
-      "path": "frames/2025-09-01.tif",
-      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2025-09-01.tif",
-      "checksum": "8cba16b314115247b89f98eb44ce6940fb388a610b66ae9df42206ffef89ccbc",
-      "size_bytes": 7193409
-    },
     {
       "date": "2025-09-08",
       "kind": "inpainted",
@@ -530,43 +520,53 @@
     },
     {
       "date": "2026-08-31",
-      "kind": "forecast",
-      "lead_weeks": 1,
+      "kind": "inpainted",
+      "lead_weeks": null,
       "units": "mg m-3",
       "path": "frames/2026-08-31.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-31.tif",
-      "checksum": "45a5a5258906a6a0d9a0b6035c0c501a971baf0285870d77acf9cd25aa89d00e",
-      "size_bytes": 7560763
+      "checksum": "29bbeeee624a603233eb9b7ec52783bf387843ab8d736db0d40383f8daf4ebc3",
+      "size_bytes": 7565890
     },
     {
       "date": "2026-09-07",
       "kind": "forecast",
-      "lead_weeks": 2,
+      "lead_weeks": 1,
       "units": "mg m-3",
       "path": "frames/2026-09-07.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-07.tif",
-      "checksum": "e937fcd771435064444ec3ed103ec6b64e86e6ff45db3a1f09626d1a48c5aa82",
-      "size_bytes": 7567720
+      "checksum": "6c0de150d15100b0792f631b5571ddadd5388fadfbef18a760ee17fddfcbc975",
+      "size_bytes": 7552673
     },
     {
       "date": "2026-09-14",
       "kind": "forecast",
-      "lead_weeks": 3,
+      "lead_weeks": 2,
       "units": "mg m-3",
       "path": "frames/2026-09-14.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-14.tif",
-      "checksum": "6a54852b388405bfcdc1e8f7833bde0046f90087663b08189ec72c3d2097b9b1",
-      "size_bytes": 7572797
+      "checksum": "7ea8afe36fef22688bcb495e5d1d843c4a7fc93971feae137d2e6dfa7cadeaef",
+      "size_bytes": 7558294
     },
     {
       "date": "2026-09-21",
       "kind": "forecast",
-      "lead_weeks": 4,
+      "lead_weeks": 3,
       "units": "mg m-3",
       "path": "frames/2026-09-21.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-21.tif",
-      "checksum": "2a75b1cca3a919cf4a386058608e14e9b0c0e4e906cf3c566c5eecfc346b7abb",
-      "size_bytes": 7579343
+      "checksum": "1bd189a2a03668573ebbeadd6da05cd476d299a39954438cee2717626b48d48d",
+      "size_bytes": 7564555
+    },
+    {
+      "date": "2026-09-28",
+      "kind": "forecast",
+      "lead_weeks": 4,
+      "units": "mg m-3",
+      "path": "frames/2026-09-28.tif",
+      "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-28.tif",
+      "checksum": "86edd63db4e96c6ed5d6734665edeff9cb904f6f1634790ae01e8ba069b9fb2c",
+      "size_bytes": 7573635
     }
   ]
 }
