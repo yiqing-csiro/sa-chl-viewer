@@ -5,22 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="South Australian coastal chlorophyll history and forecast">
     <title>SA Coastal Chlorophyll Forecast</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.8.0/dist/maplibre-gl.css">
     <style>
       :root { color-scheme: light; font-family: Inter, Arial, sans-serif; }
       * { box-sizing: border-box; }
       html, body, #map { width: 100%; height: 100%; margin: 0; }
       body { overflow: hidden; background: #dce7ec; }
-      #map { position: absolute; inset: 0; border: 0; }
+      #map { position: absolute; inset: 0; }
       .card {
-        position: absolute; z-index: 2; color: #17313a; background: rgba(255,255,255,.94);
+        position: absolute; z-index: 2; color: #17313a; background: rgba(255,255,255,.95);
         border: 1px solid rgba(23,49,58,.16); border-radius: 10px;
         box-shadow: 0 3px 16px rgba(16,39,48,.18); backdrop-filter: blur(5px);
       }
-      #status { top: 16px; left: 16px; max-width: min(390px, calc(100vw - 32px)); padding: 13px 15px; }
-      h1 { margin: 0 0 6px; font-size: 18px; line-height: 1.25; }
-      #summary { margin: 0; font-size: 13px; line-height: 1.45; }
+      #status { top: 16px; left: 16px; max-width: min(440px, calc(100vw - 32px)); padding: 12px 15px; }
+      .brand { display: flex; align-items: center; gap: 13px; }
+      #csiro-logo { width: 64px; height: 64px; flex: 0 0 auto; object-fit: contain; }
+      h1 { margin: 0 0 5px; font-size: 18px; line-height: 1.25; }
+      #summary { margin: 0; font-size: 13px; line-height: 1.4; }
       #updated { margin-top: 5px; color: #536b74; font-size: 11px; }
-      #legend { right: 16px; bottom: 96px; width: 245px; padding: 10px 12px; }
+      #legend { right: 16px; bottom: 160px; width: 245px; padding: 10px 12px; }
       .legend-title { margin-bottom: 7px; font-size: 13px; font-weight: 700; }
       #colorbar { display: block; width: 100%; height: 18px; border-radius: 3px; }
       .ticks { display: flex; justify-content: space-between; margin-top: 3px; font-size: 10px; }
@@ -29,20 +32,51 @@
       .key span::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; }
       .history::before { background: #168aad; }
       .forecast::before { background: #d95f02; }
-      #error { display: none; color: #a02020; }
+      #timeline { right: 16px; bottom: 16px; left: 16px; padding: 10px 12px 9px; }
+      .timeline-header { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+      .timeline-header button {
+        min-width: 34px; height: 30px; padding: 0 8px; color: #17313a; background: #fff;
+        border: 1px solid #9badb4; border-radius: 5px; cursor: pointer; font-size: 14px;
+      }
+      .timeline-header button:hover, .timeline-header button:focus-visible { background: #e7f2f5; outline: 2px solid #168aad; outline-offset: 1px; }
+      #current-week { margin-left: 5px; font-size: 14px; }
+      #current-kind { padding: 3px 7px; border-radius: 10px; color: white; font-size: 11px; }
+      #current-kind.inpainted { background: #168aad; }
+      #current-kind.forecast { background: #d95f02; }
+      .timeline-scroll { overflow-x: auto; padding: 0 4px 3px; }
+      .timeline-track { min-width: 980px; }
+      #week-slider { width: 100%; margin: 1px 0 3px; accent-color: #168aad; cursor: pointer; }
+      #week-labels { display: grid; grid-template-columns: repeat(14, minmax(66px, 1fr)); gap: 2px; }
+      #week-labels button {
+        padding: 3px 1px 2px; border: 0; border-top: 3px solid #168aad; color: #35515b;
+        background: transparent; cursor: pointer; font-size: 10px; white-space: nowrap;
+      }
+      #week-labels button.forecast { border-top-color: #d95f02; }
+      #week-labels button.active { color: #102b34; background: #dceff4; font-weight: 700; }
+      #week-labels button.forecast.active { background: #f9e4d6; }
+      #error { display: none; margin-top: 5px; color: #a02020; font-size: 12px; }
       @media (max-width: 620px) {
-        #status { top: 8px; left: 8px; max-width: calc(100vw - 16px); }
-        #legend { right: 8px; bottom: 88px; width: 210px; }
+        #status { top: 8px; left: 8px; max-width: calc(100vw - 16px); padding: 9px 11px; }
+        #csiro-logo { width: 48px; height: 48px; }
         h1 { font-size: 15px; }
+        #summary { font-size: 11px; }
+        #legend { right: 8px; bottom: 174px; width: 205px; }
+        #timeline { right: 8px; bottom: 8px; left: 8px; }
+        #current-week { font-size: 12px; }
       }
     </style>
   </head>
   <body>
-    <iframe id="map" title="GeoLibre South Australian chlorophyll map" allowfullscreen></iframe>
+    <main id="map" aria-label="Map of South Australian coastal chlorophyll"></main>
     <section id="status" class="card" aria-live="polite">
-      <h1>SA Coastal Chlorophyll Forecast</h1>
-      <p id="summary">Loading the latest 52-week history and four-week forecast…</p>
-      <div id="updated"></div>
+      <div class="brand">
+        <img id="csiro-logo" src="logo/CSIRO_Logo.svg" alt="CSIRO">
+        <div>
+          <h1>SA Coastal Chlorophyll Forecast</h1>
+          <p id="summary">Loading the latest 10-week history and four-week forecast…</p>
+          <div id="updated"></div>
+        </div>
+      </div>
       <div id="error"></div>
     </section>
     <section id="legend" class="card" aria-label="Chlorophyll colour scale">
@@ -51,6 +85,21 @@
       <div class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
       <div class="unit">mg m<sup>−3</sup></div>
       <div class="key"><span class="history">Inpainted</span><span class="forecast">Forecast</span></div>
+    </section>
+    <section id="timeline" class="card" aria-label="Weekly chlorophyll timeline">
+      <div class="timeline-header">
+        <button id="previous" type="button" aria-label="Previous week">◀</button>
+        <button id="play" type="button" aria-label="Play timeline">▶</button>
+        <button id="next" type="button" aria-label="Next week">▶|</button>
+        <strong id="current-week">Loading…</strong>
+        <span id="current-kind"></span>
+      </div>
+      <div class="timeline-scroll">
+        <div class="timeline-track">
+          <input id="week-slider" type="range" min="0" max="13" value="9" step="1" aria-label="Select week">
+          <div id="week-labels"></div>
+        </div>
+      </div>
     </section>
     <script>
       function turbo(x) {
@@ -66,28 +115,106 @@
       }
       const canvas = document.getElementById("colorbar");
       const ctx = canvas.getContext("2d");
-      const gamma = 3;
       for (let px = 0; px < canvas.width; px++) {
-        const normalized = px / (canvas.width - 1);
-        const rgb = turbo(Math.pow(normalized, 1 / gamma));
+        const rgb = turbo(Math.pow(px / (canvas.width - 1), 1 / 3));
         ctx.fillStyle = `rgb(${rgb.join(",")})`;
         ctx.fillRect(px, 0, 1, canvas.height);
+      }
+    </script>
+    <script type="module">
+      import * as maplibregl from "https://unpkg.com/maplibre-gl@6.8.0/dist/maplibre-gl.mjs";
+
+      const slider = document.getElementById("week-slider");
+      const labels = document.getElementById("week-labels");
+      const currentWeek = document.getElementById("current-week");
+      const currentKind = document.getElementById("current-kind");
+      const playButton = document.getElementById("play");
+      let release;
+      let map;
+      let selectedIndex = 0;
+      let playTimer;
+
+      function selectFrame(index) {
+        selectedIndex = Math.max(0, Math.min(release.entries.length - 1, Number(index)));
+        const entry = release.entries[selectedIndex];
+        slider.value = selectedIndex;
+        currentWeek.textContent = entry.label;
+        currentKind.textContent = entry.kind === "forecast" ? `Forecast +${entry.lead_weeks}` : "Inpainted";
+        currentKind.className = entry.kind;
+        labels.querySelectorAll("button").forEach((button, position) => {
+          button.classList.toggle("active", position === selectedIndex);
+          button.setAttribute("aria-current", position === selectedIndex ? "date" : "false");
+        });
+        const source = map && map.getSource("chlorophyll");
+        if (source) source.setTiles([entry.tile_url]);
+      }
+
+      function stopPlaying() {
+        clearInterval(playTimer);
+        playTimer = undefined;
+        playButton.textContent = "▶";
+        playButton.setAttribute("aria-label", "Play timeline");
+      }
+
+      function togglePlaying() {
+        if (playTimer) {
+          stopPlaying();
+          return;
+        }
+        playButton.textContent = "Ⅱ";
+        playButton.setAttribute("aria-label", "Pause timeline");
+        playTimer = setInterval(() => {
+          selectFrame((selectedIndex + 1) % release.entries.length);
+        }, release.timeline?.speed_ms || 800);
       }
 
       async function start() {
         try {
           const response = await fetch(`release.json?v=${Date.now()}`, {cache: "no-store"});
           if (!response.ok) throw new Error(`release.json returned ${response.status}`);
-          const release = await response.json();
-          const project = new URL("sa-chl.geolibre.json", location.href);
-          project.searchParams.set("v", release.generated_at_utc);
-          const viewer = new URL("https://web.geolibre.app/");
-          viewer.searchParams.set("url", project.href);
-          viewer.searchParams.set("maponly", "");
-          document.getElementById("map").src = viewer.href;
+          release = await response.json();
+          if (release.schema_version < 2 || release.entries.length !== 14) {
+            throw new Error("Expected a schema v2 release with 14 weekly frames");
+          }
+
+          slider.max = release.entries.length - 1;
+          selectedIndex = Math.max(0, release.history_weeks - 1);
+          slider.value = selectedIndex;
+          for (const [index, entry] of release.entries.entries()) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = entry.label;
+            button.className = entry.kind;
+            button.setAttribute("aria-label", `${entry.label}, ${entry.kind}`);
+            button.addEventListener("click", () => selectFrame(index));
+            labels.appendChild(button);
+          }
+
+          map = new maplibregl.Map({
+            container: "map",
+            style: release.map.basemap_style_url,
+            center: release.map.center,
+            zoom: release.map.zoom
+          });
+          map.addControl(new maplibregl.NavigationControl(), "top-right");
+          map.on("load", () => {
+            const initial = release.entries[selectedIndex];
+            map.addSource("chlorophyll", {
+              type: "raster",
+              tiles: [initial.tile_url],
+              tileSize: 256,
+              bounds: release.map.bounds
+            });
+            map.addLayer({id: "chlorophyll", type: "raster", source: "chlorophyll"});
+          });
+
+          slider.addEventListener("input", event => selectFrame(event.target.value));
+          document.getElementById("previous").addEventListener("click", () => selectFrame(selectedIndex - 1));
+          document.getElementById("next").addEventListener("click", () => selectFrame(selectedIndex + 1));
+          playButton.addEventListener("click", togglePlaying);
+          selectFrame(selectedIndex);
           document.getElementById("summary").textContent =
-            `${release.first_date} to ${release.forecast_origin}: inpainted history. ` +
-            `${release.entries[52].date} to ${release.last_date}: forecast.`;
+            `${release.history_weeks} past weeks and ${release.forecast_weeks} forecast weeks.`;
           document.getElementById("updated").textContent =
             `Updated ${new Date(release.generated_at_utc).toLocaleString("en-AU", {timeZone: "Australia/Brisbane"})} AEST`;
         } catch (error) {
