@@ -23,7 +23,12 @@
       }
       #title { top: 16px; left: 16px; width: min(455px, calc(100vw - 150px)); padding: 12px 14px; }
       .brand { display: flex; align-items: center; gap: 12px; }
+      .brand-lockup { display: flex; flex: 0 0 auto; flex-direction: column; align-items: center; gap: 3px; }
       #logo { width: 50px; height: 50px; object-fit: contain; }
+      .aquawatch-name {
+        color: var(--text); font: 600 9px/1.15 Georgia, "Times New Roman", serif;
+        letter-spacing: .025em; text-align: center; white-space: nowrap;
+      }
       h1 { margin: 0 0 4px; font-size: 18px; line-height: 1.2; }
       #summary, #loading { color: var(--muted); font-size: 12px; line-height: 1.45; }
       #loading { margin-top: 5px; }
@@ -71,6 +76,7 @@
       @media (max-width: 720px) {
         #title { top: 8px; left: 8px; width: calc(100vw - 112px); padding: 9px 10px; }
         #logo { width: 38px; height: 38px; } h1 { font-size: 14px; }
+        .aquawatch-name { font-size: 7px; }
         #summary { font-size: 10px; } #back { top: 8px; right: 8px; }
         #controls { right: 8px; bottom: 8px; left: 8px; width: auto; max-height: 43vh; }
         #legend, #hint { display: none; }
@@ -84,7 +90,10 @@
     <canvas id="gl" aria-label="Interactive 3D stack of weekly chlorophyll images"></canvas>
     <section id="title" class="hud panel" aria-live="polite">
       <div class="brand">
-        <img id="logo" src="logo/CSIRO_Logo.svg" alt="CSIRO">
+        <div class="brand-lockup">
+          <img id="logo" src="logo/CSIRO_Logo.svg" alt="CSIRO">
+          <span class="aquawatch-name">AquaWatch Australia</span>
+        </div>
         <div>
           <h1>SA Coastal Chlorophyll — 3D Time Stack</h1>
           <div id="summary">Loading the latest release…</div>
@@ -116,7 +125,7 @@
       <canvas id="colorbar" width="600" height="36"></canvas>
       <div class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
       <div class="unit">Chlorophyll-a concentration (mg m<sup>−3</sup>)</div>
-      <div class="key"><span><i></i>Inpainted</span><span class="forecast"><i></i>Forecast</span></div>
+      <div class="key"><span><i></i>Historical</span><span class="forecast"><i></i>Forecast</span></div>
     </section>
     <script>
       function turbo(x) {
@@ -246,7 +255,7 @@
           const layer = new THREE.Mesh(geometry, material); layer.userData.index = index;
           const colour = entry.kind === "forecast" ? FORECAST : HISTORY;
           const frame = new THREE.LineLoop(frameGeometry, new THREE.LineBasicMaterial({color: colour, transparent: true, opacity: .9}));
-          const suffix = entry.kind === "forecast" ? `  Forecast +${entry.lead_weeks}` : "  Inpainted";
+          const suffix = entry.kind === "forecast" ? `  Forecast +${entry.lead_weeks}` : "  Historical";
           const label = makeLabel(entry.label + suffix, entry.kind === "forecast" ? "#f18b45" : "#39b8d6");
           stack.add(layer, frame, label); layers.push(layer); frames.push(frame); labels.push(label);
 
@@ -277,7 +286,7 @@
         release.entries.forEach((entry, index) => {
           const item = document.createElement("li"), button = document.createElement("button");
           button.type = "button"; button.className = `week ${entry.kind}`;
-          button.innerHTML = `<span class="mark"></span><span>${entry.label}</span><small>${entry.kind === "forecast" ? `Forecast +${entry.lead_weeks}` : "Inpainted"}</small>`;
+          button.innerHTML = `<span class="mark"></span><span>${entry.label}</span><small>${entry.kind === "forecast" ? `Forecast +${entry.lead_weeks}` : "Historical"}</small>`;
           button.setAttribute("aria-pressed", "false");
           button.addEventListener("click", () => setFocus(selected === index ? -1 : index));
           item.appendChild(button); $("weeks").appendChild(item); weekButtons.push(button);

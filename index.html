@@ -20,15 +20,15 @@
       }
       #status { top: 16px; left: 16px; max-width: min(440px, calc(100vw - 32px)); padding: 12px 15px; }
       .brand { display: flex; align-items: center; gap: 13px; }
+      .brand-lockup { display: flex; flex: 0 0 auto; flex-direction: column; align-items: center; gap: 3px; }
       #csiro-logo { width: 64px; height: 64px; flex: 0 0 auto; object-fit: contain; }
+      .aquawatch-name {
+        color: #29464f; font: 600 10px/1.15 Georgia, "Times New Roman", serif;
+        letter-spacing: .025em; text-align: center; white-space: nowrap;
+      }
       h1 { margin: 0 0 5px; font-size: 18px; line-height: 1.25; }
       #summary { margin: 0; font-size: 13px; line-height: 1.4; }
       #updated { margin-top: 5px; color: #536b74; font-size: 11px; }
-      #view-3d {
-        display: inline-block; margin-top: 9px; padding: 6px 10px; color: #fff; background: #176f8c;
-        border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: 700;
-      }
-      #view-3d:hover, #view-3d:focus-visible { background: #0f5b74; outline: 2px solid #168aad; outline-offset: 2px; }
       #legend { right: 16px; bottom: 160px; width: 245px; padding: 10px 12px; }
       .legend-title { margin-bottom: 7px; font-size: 13px; font-weight: 700; }
       #colorbar { display: block; width: 100%; height: 18px; border-radius: 3px; }
@@ -51,7 +51,16 @@
       #current-kind.forecast { background: #d95f02; }
       .timeline-scroll { overflow-x: auto; padding: 0 4px 3px; }
       .timeline-track { min-width: 980px; }
-      #week-slider { width: 100%; margin: 1px 0 3px; accent-color: #168aad; cursor: pointer; }
+      .timeline-range { position: relative; height: 19px; margin: 1px 0 3px; cursor: pointer; touch-action: none; }
+      .timeline-range:focus-within { outline: 2px solid #168aad; outline-offset: 2px; border-radius: 5px; }
+      #timeline-rail { position: absolute; top: 8px; height: 3px; background: #91a8b0; border-radius: 2px; pointer-events: none; }
+      #timeline-dot {
+        position: absolute; top: 3px; width: 13px; height: 13px; border: 2px solid #fff;
+        border-radius: 50%; background: #168aad; box-shadow: 0 0 0 1px #176f8c;
+        transform: translateX(-50%); pointer-events: none;
+      }
+      #timeline-dot.forecast { background: #d95f02; box-shadow: 0 0 0 1px #a94600; }
+      #week-slider { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
       #week-labels { display: grid; grid-template-columns: repeat(14, minmax(66px, 1fr)); gap: 2px; }
       #week-labels button {
         padding: 3px 1px 2px; border: 0; border-top: 3px solid #168aad; color: #35515b;
@@ -64,6 +73,7 @@
       @media (max-width: 620px) {
         #status { top: 8px; left: 8px; max-width: calc(100vw - 16px); padding: 9px 11px; }
         #csiro-logo { width: 48px; height: 48px; }
+        .aquawatch-name { font-size: 8px; }
         h1 { font-size: 15px; }
         #summary { font-size: 11px; }
         #legend { right: 8px; bottom: 174px; width: 205px; }
@@ -76,7 +86,10 @@
     <main id="map" aria-label="Map of South Australian coastal chlorophyll"></main>
     <section id="status" class="card" aria-live="polite">
       <div class="brand">
-        <img id="csiro-logo" src="logo/CSIRO_Logo.svg" alt="CSIRO">
+        <div class="brand-lockup">
+          <img id="csiro-logo" src="logo/CSIRO_Logo.svg" alt="CSIRO">
+          <span class="aquawatch-name">AquaWatch Australia</span>
+        </div>
         <div>
           <h1>SA Coastal Chlorophyll Forecast</h1>
           <p id="summary">Loading the latest 10-week history and four-week forecast…</p>
@@ -94,7 +107,7 @@
       <canvas id="colorbar" width="600" height="36"></canvas>
       <div class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
       <div class="unit">mg m<sup>−3</sup></div>
-      <div class="key"><span class="history">Inpainted</span><span class="forecast">Forecast</span></div>
+      <div class="key"><span class="history">Historical</span><span class="forecast">Forecast</span></div>
     </section>
     <section id="timeline" class="card" aria-label="Weekly chlorophyll timeline">
       <div class="timeline-header">
@@ -106,7 +119,11 @@
       </div>
       <div class="timeline-scroll">
         <div class="timeline-track">
-          <input id="week-slider" type="range" min="0" max="13" value="9" step="1" aria-label="Select week">
+          <div id="timeline-range" class="timeline-range">
+            <div id="timeline-rail"></div>
+            <span id="timeline-dot"></span>
+            <input id="week-slider" type="range" min="0" max="13" value="9" step="1" aria-label="Select week">
+          </div>
           <div id="week-labels"></div>
         </div>
       </div>
@@ -136,6 +153,9 @@
 
       const slider = document.getElementById("week-slider");
       const labels = document.getElementById("week-labels");
+      const timelineRange = document.getElementById("timeline-range");
+      const timelineRail = document.getElementById("timeline-rail");
+      const timelineDot = document.getElementById("timeline-dot");
       const currentWeek = document.getElementById("current-week");
       const currentKind = document.getElementById("current-kind");
       const playButton = document.getElementById("play");
@@ -149,7 +169,7 @@
         const entry = release.entries[selectedIndex];
         slider.value = selectedIndex;
         currentWeek.textContent = entry.label;
-        currentKind.textContent = entry.kind === "forecast" ? `Forecast +${entry.lead_weeks}` : "Inpainted";
+        currentKind.textContent = entry.kind === "forecast" ? `Forecast +${entry.lead_weeks}` : "Historical";
         currentKind.className = entry.kind;
         labels.querySelectorAll("button").forEach((button, position) => {
           button.classList.toggle("active", position === selectedIndex);
@@ -157,6 +177,36 @@
         });
         const source = map && map.getSource("chlorophyll");
         if (source) source.setTiles([entry.tile_url]);
+        positionTimelineIndicator();
+      }
+
+      function weekCenter(button) {
+        const buttonBounds = button.getBoundingClientRect();
+        const rangeBounds = timelineRange.getBoundingClientRect();
+        return buttonBounds.left - rangeBounds.left + buttonBounds.width / 2;
+      }
+
+      function positionTimelineIndicator() {
+        const buttons = labels.querySelectorAll("button");
+        if (!buttons.length) return;
+        const first = weekCenter(buttons[0]);
+        const last = weekCenter(buttons[buttons.length - 1]);
+        timelineRail.style.left = `${first}px`;
+        timelineRail.style.width = `${last - first}px`;
+        timelineDot.style.left = `${weekCenter(buttons[selectedIndex])}px`;
+        timelineDot.classList.toggle("forecast", release.entries[selectedIndex].kind === "forecast");
+      }
+
+      function selectPointerWeek(event) {
+        const bounds = timelineRange.getBoundingClientRect();
+        const pointerX = event.clientX - bounds.left;
+        const buttons = [...labels.querySelectorAll("button")];
+        let nearest = 0;
+        buttons.forEach((button, index) => {
+          if (Math.abs(weekCenter(button) - pointerX) <
+              Math.abs(weekCenter(buttons[nearest]) - pointerX)) nearest = index;
+        });
+        selectFrame(nearest);
       }
 
       function stopPlaying() {
@@ -195,7 +245,8 @@
             button.type = "button";
             button.textContent = entry.label;
             button.className = entry.kind;
-            button.setAttribute("aria-label", `${entry.label}, ${entry.kind}`);
+            const kindLabel = entry.kind === "forecast" ? `Forecast +${entry.lead_weeks}` : "Historical";
+            button.setAttribute("aria-label", `${entry.label}, ${kindLabel}`);
             button.addEventListener("click", () => selectFrame(index));
             labels.appendChild(button);
           }
@@ -219,6 +270,25 @@
           });
 
           slider.addEventListener("input", event => selectFrame(event.target.value));
+          timelineRange.addEventListener("pointerdown", event => {
+            event.preventDefault();
+            slider.focus({preventScroll: true});
+            timelineRange.setPointerCapture(event.pointerId);
+            selectPointerWeek(event);
+          });
+          timelineRange.addEventListener("pointermove", event => {
+            if (timelineRange.hasPointerCapture(event.pointerId)) selectPointerWeek(event);
+          });
+          timelineRange.addEventListener("pointerup", event => {
+            if (timelineRange.hasPointerCapture(event.pointerId)) {
+              timelineRange.releasePointerCapture(event.pointerId);
+            }
+          });
+          if ("ResizeObserver" in window) {
+            new ResizeObserver(positionTimelineIndicator).observe(labels);
+          } else {
+            addEventListener("resize", positionTimelineIndicator);
+          }
           document.getElementById("previous").addEventListener("click", () => selectFrame(selectedIndex - 1));
           document.getElementById("next").addEventListener("click", () => selectFrame(selectedIndex + 1));
           playButton.addEventListener("click", togglePlaying);
