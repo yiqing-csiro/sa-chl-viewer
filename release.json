@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at_utc": "2026-09-10T01:28:50.539666+00:00",
+  "generated_at_utc": "2026-09-10T01:52:38.637775+00:00",
   "history_product": "inpainted",
   "history_weeks": 10,
   "source_history_weeks": 52,
@@ -163,7 +163,7 @@
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-31.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-31.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-31.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
-      "checksum": "8301eb7377d0e4b2046cfbb41672f17b6836c0441ea93cca67c6a456f789258e",
+      "checksum": "ec7128bc0c80c6005b5f733fbf56cf1a4891fdea78a00abecd7851184b060a0c",
       "size_bytes": 7565546
     },
     {

@@ -129,7 +129,7 @@ async function initialiseEmailReport(target) {
   });
 
   addEventListener("message", event => {
-    if (event.source !== responseFrame.contentWindow) return;
+    if (!isTrustedAppsScriptOrigin(event.origin)) return;
     const result = event.data;
     if (!result || result.type !== "forecast-email-result" ||
         result.requestId !== pendingRequestId) return;
@@ -145,6 +145,17 @@ async function initialiseEmailReport(target) {
       setStatus(result.message || "The report could not be sent. Please try again.", "error");
     }
   });
+}
+
+function isTrustedAppsScriptOrigin(origin) {
+  try {
+    const url = new URL(origin);
+    return url.protocol === "https:" && url.port === "" &&
+      (url.hostname === "script.google.com" ||
+       url.hostname.endsWith("-script.googleusercontent.com"));
+  } catch {
+    return false;
+  }
 }
 
 function validateConfig(config) {
