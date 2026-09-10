@@ -6,6 +6,7 @@
     <meta name="description" content="South Australian coastal chlorophyll history and forecast">
     <title>SA Coastal Chlorophyll Forecast</title>
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.8.0/dist/maplibre-gl.css">
+    <link rel="stylesheet" href="email-report.css">
     <style>
       :root { color-scheme: light; font-family: Inter, Arial, sans-serif; }
       * { box-sizing: border-box; }
@@ -80,7 +81,10 @@
           <h1>SA Coastal Chlorophyll Forecast</h1>
           <p id="summary">Loading the latest 10-week history and four-week forecast…</p>
           <div id="updated"></div>
-          <a id="view-3d" href="3d.html">Explore in 3D</a>
+          <div class="viewer-actions">
+            <a id="view-3d" href="3d.html">Explore in 3D</a>
+            <span data-forecast-email></span>
+          </div>
         </div>
       </div>
       <div id="error"></div>
@@ -232,5 +236,6 @@
       }
       start();
     </script>
+    <script type="module" src="email-report.js"></script>
   </body>
 </html>

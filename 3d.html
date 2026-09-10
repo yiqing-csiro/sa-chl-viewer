@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="3D time stack of South Australian coastal chlorophyll history and forecast">
     <title>SA Coastal Chlorophyll — 3D Time Stack</title>
+    <link rel="stylesheet" href="email-report.css">
     <style>
       :root {
         color-scheme: dark; font-family: Inter, Arial, sans-serif;
@@ -89,6 +90,7 @@
           <div id="summary">Loading the latest release…</div>
           <div id="loading"></div>
           <div id="error"></div>
+          <div class="viewer-actions"><span data-forecast-email></span></div>
         </div>
       </div>
     </section>
@@ -347,5 +349,6 @@
       }
       start();
     </script>
+    <script type="module" src="email-report.js"></script>
   </body>
 </html>
