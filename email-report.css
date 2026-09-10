@@ -35,6 +35,15 @@
   cursor: not-allowed;
 }
 
+.weekly-subscribe-trigger {
+  background: #176b42;
+}
+
+.weekly-subscribe-trigger:hover,
+.weekly-subscribe-trigger:focus-visible {
+  background: #105333;
+}
+
 .forecast-email-dialog {
   width: min(470px, calc(100vw - 24px));
   padding: 0;

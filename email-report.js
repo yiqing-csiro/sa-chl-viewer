@@ -1,14 +1,11 @@
 const mount = document.querySelector("[data-forecast-email]");
 
-if (mount) initialiseEmailReport(mount);
+if (mount) initialiseEmailReports(mount);
 
-async function initialiseEmailReport(target) {
-  const trigger = document.createElement("button");
-  trigger.type = "button";
-  trigger.className = "forecast-email-trigger";
-  trigger.textContent = "Loading email…";
-  trigger.disabled = true;
-  target.appendChild(trigger);
+async function initialiseEmailReports(target) {
+  const sendTrigger = makeTrigger("Loading email…");
+  const subscribeTrigger = makeTrigger("Loading subscriptions…", "weekly-subscribe-trigger");
+  target.append(sendTrigger, subscribeTrigger);
 
   let config;
   try {
@@ -17,8 +14,11 @@ async function initialiseEmailReport(target) {
     config = await response.json();
     validateConfig(config);
   } catch (error) {
-    trigger.textContent = "Email unavailable";
-    trigger.title = error instanceof Error ? error.message : String(error);
+    const message = error instanceof Error ? error.message : String(error);
+    sendTrigger.textContent = "Email unavailable";
+    subscribeTrigger.textContent = "Subscriptions unavailable";
+    sendTrigger.title = message;
+    subscribeTrigger.title = message;
     return;
   }
 
@@ -28,9 +28,37 @@ async function initialiseEmailReport(target) {
   responseFrame.title = "Forecast email response";
   target.after(responseFrame);
 
+  configureEmailAction(sendTrigger, responseFrame, config, {
+    action: "sendForecast",
+    trigger: "Send forecast to my email",
+    heading: "Send forecast to my email",
+    description: "Receive the latest four-week chlorophyll forecast as an illustrated HTML report.",
+    submit: "Send report",
+    pending: "Preparing and sending your four-week forecast…"
+  });
+  configureEmailAction(subscribeTrigger, responseFrame, config, {
+    action: "subscribe",
+    trigger: "Subscribe to weekly reports",
+    heading: "Subscribe to weekly reports",
+    description: "Get the latest 10-week history and four-week forecast after each weekly update. Confirm your address by email; unsubscribe at any time.",
+    submit: "Subscribe",
+    pending: "Creating your subscription…"
+  });
+}
+
+function makeTrigger(label, extraClass = "") {
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = ("forecast-email-trigger " + extraClass).trim();
+  trigger.textContent = label;
+  trigger.disabled = true;
+  return trigger;
+}
+
+function configureEmailAction(trigger, responseFrame, config, copy) {
   const dialog = document.createElement("dialog");
   dialog.className = "forecast-email-dialog";
-  dialog.innerHTML = '<form class="forecast-email-form" method="post"><div class="forecast-email-heading"><div><h2>Send forecast to my email</h2><p>Receive the latest four-week chlorophyll forecast as an illustrated HTML report.</p></div><button class="forecast-email-close" type="button" aria-label="Close">×</button></div><label class="forecast-email-field">Email address<input name="recipient" type="email" autocomplete="email" maxlength="254" inputmode="email" placeholder="name@example.com" required></label><div class="forecast-email-captcha" aria-label="Human verification"></div><input name="captchaToken" type="hidden"><input name="requestId" type="hidden"><p class="forecast-email-status" role="status" aria-live="polite"></p><div class="forecast-email-actions"><button class="forecast-email-cancel" type="button">Cancel</button><button class="forecast-email-submit" type="submit">Send report</button></div></form>';
+  dialog.innerHTML = '<form class="forecast-email-form" method="post"><div class="forecast-email-heading"><div><h2></h2><p></p></div><button class="forecast-email-close" type="button" aria-label="Close">×</button></div><label class="forecast-email-field">Email address<input name="recipient" type="email" autocomplete="email" maxlength="254" inputmode="email" placeholder="name@example.com" required></label><div class="forecast-email-captcha" aria-label="Human verification"></div><input name="action" type="hidden"><input name="captchaToken" type="hidden"><input name="requestId" type="hidden"><p class="forecast-email-status" role="status" aria-live="polite"></p><div class="forecast-email-actions"><button class="forecast-email-cancel" type="button">Cancel</button><button class="forecast-email-submit" type="submit"></button></div></form>';
   document.body.appendChild(dialog);
 
   const form = dialog.querySelector("form");
@@ -46,8 +74,12 @@ async function initialiseEmailReport(target) {
   let pendingRequestId = "";
   let timeout;
 
+  dialog.querySelector("h2").textContent = copy.heading;
+  dialog.querySelector(".forecast-email-heading p").textContent = copy.description;
+  form.elements.action.value = copy.action;
   form.action = config.endpoint;
   form.target = responseFrame.name;
+  submit.textContent = copy.submit;
 
   function setStatus(message, kind = "") {
     status.textContent = message;
@@ -59,7 +91,7 @@ async function initialiseEmailReport(target) {
     cancel.disabled = pending;
     close.disabled = pending;
     emailInput.readOnly = pending;
-    submit.textContent = pending ? "Sending…" : "Send report";
+    submit.textContent = pending ? "Sending…" : copy.submit;
   }
 
   function resetCaptcha() {
@@ -81,7 +113,7 @@ async function initialiseEmailReport(target) {
           theme: "light"
         });
       }
-      setStatus("Complete the verification, then send the report.");
+      setStatus("Complete the verification, then continue.");
       emailInput.focus();
     } catch {
       setStatus("Human verification could not be loaded. Please try again later.", "error");
@@ -93,7 +125,7 @@ async function initialiseEmailReport(target) {
     if (!pendingRequestId) dialog.close();
   }
 
-  trigger.textContent = "Send forecast to my email";
+  trigger.textContent = copy.trigger;
   trigger.disabled = false;
   trigger.addEventListener("click", openDialog);
   cancel.addEventListener("click", closeDialog);
@@ -117,14 +149,14 @@ async function initialiseEmailReport(target) {
     pendingRequestId = randomId();
     captchaInput.value = captchaToken;
     requestInput.value = pendingRequestId;
-    setStatus("Preparing and sending your four-week forecast…");
+    setStatus(copy.pending);
     setPending(true);
     timeout = setTimeout(() => {
       pendingRequestId = "";
       setPending(false);
       resetCaptcha();
       setStatus("The email service did not respond. Please try again.", "error");
-    }, 45000);
+    }, 60000);
     HTMLFormElement.prototype.submit.call(form);
   });
 
@@ -140,9 +172,9 @@ async function initialiseEmailReport(target) {
     resetCaptcha();
     if (result.ok) {
       emailInput.value = "";
-      setStatus(result.message || "Forecast report sent. Please check your inbox.", "success");
+      setStatus(result.message || "Request completed successfully.", "success");
     } else {
-      setStatus(result.message || "The report could not be sent. Please try again.", "error");
+      setStatus(result.message || "The request could not be completed. Please try again.", "error");
     }
   });
 }
