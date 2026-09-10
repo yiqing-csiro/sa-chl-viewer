@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at_utc": "2026-09-09T02:53:47.304255+00:00",
+  "generated_at_utc": "2026-09-10T00:32:43.427546+00:00",
   "history_product": "inpainted",
   "history_weeks": 10,
   "source_history_weeks": 52,
@@ -36,6 +36,7 @@
       "path": "frames/2026-06-29.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-06-29.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-06-29.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-06-29.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "7ba3db130a90b8b1c46295db02f6af6c4bbf5e6492f0199602a4d8f5e3c700e6",
       "size_bytes": 7586750
     },
@@ -49,6 +50,7 @@
       "path": "frames/2026-07-06.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-06.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-06.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-06.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "38dff4c8067f189d95bdd0e5934ed72b450b98523b6607daa102f4bc9d307a42",
       "size_bytes": 7588155
     },
@@ -62,6 +64,7 @@
       "path": "frames/2026-07-13.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-13.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-13.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-13.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "2094928af0327ebb131edd0886819841e6a8cabac95e8a1967d193ec2c2a1cbd",
       "size_bytes": 7594229
     },
@@ -75,6 +78,7 @@
       "path": "frames/2026-07-20.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-20.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-20.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-20.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "0b1c12ad5d42da40285077c3ea38def83144e65bda4ba65c4bb7668260defddb",
       "size_bytes": 7589801
     },
@@ -88,6 +92,7 @@
       "path": "frames/2026-07-27.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-07-27.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-27.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-07-27.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "a8f1fd5dce4295650669e668de157f83cc0130320437185911954feef1124333",
       "size_bytes": 7606118
     },
@@ -101,6 +106,7 @@
       "path": "frames/2026-08-03.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-03.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-03.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-03.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "1af8ca5a0da3df9ac588f51f79a86b995fea5e128c3de554b975a5205658e736",
       "size_bytes": 7580899
     },
@@ -114,6 +120,7 @@
       "path": "frames/2026-08-10.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-10.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-10.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-10.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "aff3e53395b302fdeb9e417e90e5a75b88d50b0e75e1e49a55e8e85cb6f2784f",
       "size_bytes": 7589847
     },
@@ -127,6 +134,7 @@
       "path": "frames/2026-08-17.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-17.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-17.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-17.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "b2ccef4332cf48532db79de2f01f2024c022d464914963ce3b48e4810b28c5f5",
       "size_bytes": 7537049
     },
@@ -140,6 +148,7 @@
       "path": "frames/2026-08-24.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-24.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-24.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-24.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "a259167ba005bf7ae00d8bf062763dc7924f49eecda9b080403a5f0c37788a62",
       "size_bytes": 7585881
     },
@@ -153,7 +162,8 @@
       "path": "frames/2026-08-31.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-08-31.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-31.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
-      "checksum": "8301eb7377d0e4b2046cfbb41672f17b6836c0441ea93cca67c6a456f789258e",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-08-31.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "checksum": "ec7128bc0c80c6005b5f733fbf56cf1a4891fdea78a00abecd7851184b060a0c",
       "size_bytes": 7565546
     },
     {
@@ -166,6 +176,7 @@
       "path": "frames/2026-09-07.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-07.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-07.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-07.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "0c21a987a9a58e6c5401190bf9ad5c481797e77b7fbbcda09e660536242d0e3c",
       "size_bytes": 7552851
     },
@@ -179,6 +190,7 @@
       "path": "frames/2026-09-14.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-14.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-14.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-14.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "bcdcb5d7dfbf7d5529a412ef2e436e3751f49d304f4af4c637bd0f5fbc45cb1b",
       "size_bytes": 7558034
     },
@@ -192,6 +204,7 @@
       "path": "frames/2026-09-21.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-21.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-21.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-21.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "67bb8273f2d258bc8c627c09ac83645775ccf11ab31cb2a3ea5510a20eb73b46",
       "size_bytes": 7565051
     },
@@ -205,6 +218,7 @@
       "path": "frames/2026-09-28.tif",
       "url": "https://raw.githubusercontent.com/yiqing-csiro/sa-chl-viewer/data/frames/2026-09-28.tif",
       "tile_url": "https://titiler.d2s.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-28.tif&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
+      "preview_url": "https://titiler.d2s.org/cog/preview.png?url=https:%2F%2Fraw.githubusercontent.com%2Fyiqing-csiro%2Fsa-chl-viewer%2Fdata%2Fframes%2F2026-09-28.tif&width=768&height=768&rescale=0%2C20&color_formula=Gamma%20R%203&colormap_name=turbo&nodata=-9999&return_mask=true",
       "checksum": "bf331d14f46151d3a52e408d745cb6e0208cb7f9ef0c7d574175984325b5f596",
       "size_bytes": 7573409
     }

@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="3D time stack of South Australian coastal chlorophyll history and forecast">
+    <title>SA Coastal Chlorophyll — 3D Time Stack</title>
+    <style>
+      :root {
+        color-scheme: dark; font-family: Inter, Arial, sans-serif;
+        --bg: #08151b; --panel: rgba(12,31,39,.91); --line: #31515d;
+        --text: #edf7fa; --muted: #a5bbc3; --history: #39b8d6; --forecast: #f18b45;
+      }
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; }
+      body { overflow: hidden; color: var(--text); background: var(--bg); }
+      #gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+      .hud { position: fixed; z-index: 2; }
+      .panel {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+        box-shadow: 0 5px 22px rgba(0,0,0,.3); backdrop-filter: blur(7px);
+      }
+      #title { top: 16px; left: 16px; width: min(455px, calc(100vw - 150px)); padding: 12px 14px; }
+      .brand { display: flex; align-items: center; gap: 12px; }
+      #logo { width: 50px; height: 50px; object-fit: contain; }
+      h1 { margin: 0 0 4px; font-size: 18px; line-height: 1.2; }
+      #summary, #loading { color: var(--muted); font-size: 12px; line-height: 1.45; }
+      #loading { margin-top: 5px; }
+      #error { display: none; margin-top: 6px; color: #ffaaa1; font-size: 12px; }
+      #back {
+        top: 16px; right: 16px; padding: 8px 11px; color: var(--text); text-decoration: none;
+        font-size: 12px; font-weight: 700;
+      }
+      #back:hover, #back:focus-visible { border-color: var(--history); color: #fff; outline: 2px solid var(--history); }
+      #controls { left: 16px; bottom: 16px; width: 310px; max-height: calc(100vh - 130px); padding: 13px 14px; overflow: auto; }
+      .section-title { margin: 0 0 8px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+      .range-row { display: grid; grid-template-columns: 70px 1fr 40px; align-items: center; gap: 8px; margin: 8px 0; font-size: 12px; }
+      input[type=range] { width: 100%; accent-color: var(--history); }
+      output { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .toggles { display: flex; gap: 12px; margin: 10px 0; font-size: 12px; }
+      .toggles label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+      input[type=checkbox] { accent-color: var(--history); }
+      .actions { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+      button {
+        padding: 6px 9px; color: var(--text); background: transparent; border: 1px solid var(--line);
+        border-radius: 6px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+      }
+      button:hover, button:focus-visible { border-color: var(--history); outline: 1px solid var(--history); }
+      button.active { color: #061319; background: var(--history); border-color: var(--history); }
+      #weeks { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+      .week {
+        display: grid; grid-template-columns: 8px 1fr auto; align-items: center; gap: 8px;
+        width: 100%; padding: 5px 7px; text-align: left; font-weight: 500;
+      }
+      .week .mark { width: 8px; height: 8px; border-radius: 50%; background: var(--history); }
+      .week.forecast .mark { background: var(--forecast); }
+      .week small { color: var(--muted); font-size: 10px; }
+      .week.selected { color: #061319; background: var(--history); }
+      .week.forecast.selected { background: var(--forecast); border-color: var(--forecast); }
+      .week.selected small { color: #17313a; }
+      .week.failed { opacity: .45; text-decoration: line-through; }
+      #legend { right: 16px; bottom: 16px; width: 255px; padding: 10px 12px; }
+      #colorbar { display: block; width: 100%; height: 16px; border-radius: 3px; }
+      .ticks { display: flex; justify-content: space-between; margin-top: 3px; color: var(--muted); font-size: 10px; }
+      .unit { margin-top: 4px; color: var(--muted); text-align: center; font-size: 11px; }
+      .key { display: flex; justify-content: center; gap: 14px; margin-top: 8px; font-size: 11px; }
+      .key i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; background: var(--history); }
+      .key .forecast i { background: var(--forecast); }
+      #hint { top: 100px; right: 16px; color: var(--muted); font-size: 11px; line-height: 1.6; text-align: right; pointer-events: none; }
+      @media (max-width: 720px) {
+        #title { top: 8px; left: 8px; width: calc(100vw - 112px); padding: 9px 10px; }
+        #logo { width: 38px; height: 38px; } h1 { font-size: 14px; }
+        #summary { font-size: 10px; } #back { top: 8px; right: 8px; }
+        #controls { right: 8px; bottom: 8px; left: 8px; width: auto; max-height: 43vh; }
+        #legend, #hint { display: none; }
+      }
+    </style>
+    <script type="importmap">
+      {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
+    </script>
+  </head>
+  <body>
+    <canvas id="gl" aria-label="Interactive 3D stack of weekly chlorophyll images"></canvas>
+    <section id="title" class="hud panel" aria-live="polite">
+      <div class="brand">
+        <img id="logo" src="logo/CSIRO_Logo.svg" alt="CSIRO">
+        <div>
+          <h1>SA Coastal Chlorophyll — 3D Time Stack</h1>
+          <div id="summary">Loading the latest release…</div>
+          <div id="loading"></div>
+          <div id="error"></div>
+        </div>
+      </div>
+    </section>
+    <a id="back" class="hud panel" href="index.html">← Back to 2D</a>
+    <div id="hint" class="hud">Drag to orbit · wheel/pinch to zoom · right-drag to pan<br>Click a layer to focus · Space to play · Esc to show all</div>
+    <section id="controls" class="hud panel" aria-label="3D stack controls">
+      <p class="section-title">Stack controls</p>
+      <label class="range-row">Layer gap <input id="gap" type="range" min="0.18" max="1.2" value="0.48" step="0.02"><output id="gap-value">0.48</output></label>
+      <label class="range-row">Opacity <input id="opacity" type="range" min="0.25" max="1" value="0.86" step="0.02"><output id="opacity-value">0.86</output></label>
+      <div class="toggles">
+        <label><input id="frames" type="checkbox" checked> Frames</label>
+        <label><input id="rotate" type="checkbox"> Auto-rotate</label>
+      </div>
+      <div class="actions">
+        <button id="play" type="button">▶ Play</button>
+        <button id="show-all" type="button">Show all</button>
+        <button id="reset-view" type="button">Reset view</button>
+      </div>
+      <p class="section-title">Weeks · oldest at base</p>
+      <ol id="weeks"></ol>
+    </section>
+    <section id="legend" class="hud panel" aria-label="Chlorophyll colour scale">
+      <canvas id="colorbar" width="600" height="36"></canvas>
+      <div class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
+      <div class="unit">Chlorophyll-a concentration (mg m<sup>−3</sup>)</div>
+      <div class="key"><span><i></i>Inpainted</span><span class="forecast"><i></i>Forecast</span></div>
+    </section>
+    <script>
+      function turbo(x) {
+        const c = [
+          [0.13572138,4.6153926,-42.66032258,132.13108234,-152.94239396,59.28637943],
+          [0.09140261,2.19418839,4.84296658,-14.18503333,4.27729857,2.82956604],
+          [0.1066733,12.64194608,-60.58204836,110.36276771,-89.90310912,27.34824973]
+        ];
+        x = Math.max(0, Math.min(1, x));
+        return c.map(k => Math.round(255 * Math.max(0, Math.min(1,
+          k[0] + x*(k[1] + x*(k[2] + x*(k[3] + x*(k[4] + x*k[5]))))
+        ))));
+      }
+      const bar = document.getElementById("colorbar"), barContext = bar.getContext("2d");
+      for (let px = 0; px < bar.width; px++) {
+        const rgb = turbo(Math.pow(px / (bar.width - 1), 1 / 3));
+        barContext.fillStyle = `rgb(${rgb.join(",")})`;
+        barContext.fillRect(px, 0, 1, bar.height);
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+
+      const $ = id => document.getElementById(id);
+      const HISTORY = 0x39b8d6, FORECAST = 0xf18b45;
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let release, renderer, scene, camera, controls, stack, axisGroup;
+      let selected = -1, playTimer, loaded = 0, failed = 0;
+      const state = {gap: 0.48, opacity: 0.86};
+      const layers = [], frames = [], labels = [], weekButtons = [];
+
+      function showError(message) {
+        $("error").style.display = "block";
+        $("error").textContent = message;
+      }
+
+      function makeLabel(text, color) {
+        const canvas = document.createElement("canvas"), context = canvas.getContext("2d");
+        context.font = "600 30px Arial"; const width = Math.ceil(context.measureText(text).width) + 24;
+        canvas.width = width; canvas.height = 46; context.font = "600 30px Arial";
+        context.fillStyle = "rgba(8,21,27,.82)"; context.fillRect(0, 0, width, 46);
+        context.fillStyle = color; context.textBaseline = "middle"; context.fillText(text, 12, 23);
+        const texture = new THREE.CanvasTexture(canvas);
+        const sprite = new THREE.Sprite(new THREE.SpriteMaterial({map: texture, transparent: true, depthTest: false}));
+        sprite.scale.set(width * .009, .414, 1); sprite.userData.width = width * .009;
+        return sprite;
+      }
+
+      function homeView() {
+        const top = (release.entries.length - 1) * state.gap;
+        camera.position.set(11, top + 6, 12);
+        controls.target.set(0, top / 2, 0);
+        controls.update();
+      }
+
+      function layout() {
+        const top = (release.entries.length - 1) * state.gap;
+        layers.forEach((layer, index) => {
+          layer.position.y = index * state.gap;
+          frames[index].position.y = index * state.gap;
+          labels[index].position.set(5.9 + labels[index].userData.width / 2, index * state.gap, 4.3);
+        });
+        axisGroup.position.set(5.45, 0, 4.25);
+        axisGroup.scale.y = Math.max(top, .001);
+        controls.target.y = top / 2;
+      }
+
+      function applyFocus() {
+        layers.forEach((layer, index) => {
+          const dimmed = selected >= 0 && selected !== index;
+          layer.material.opacity = state.opacity * (dimmed ? .13 : 1);
+          frames[index].material.opacity = dimmed ? .18 : .9;
+          labels[index].material.opacity = dimmed ? .28 : 1;
+        });
+        weekButtons.forEach((button, index) => {
+          button.classList.toggle("selected", selected === index);
+          button.setAttribute("aria-pressed", selected === index ? "true" : "false");
+        });
+      }
+
+      function setFocus(index) {
+        selected = index < 0 ? -1 : Math.max(0, Math.min(layers.length - 1, index));
+        applyFocus();
+      }
+
+      function stopPlaying() {
+        clearInterval(playTimer); playTimer = undefined;
+        $("play").classList.remove("active"); $("play").textContent = "▶ Play";
+      }
+
+      function togglePlay() {
+        if (playTimer) { stopPlaying(); return; }
+        if (selected < 0) setFocus(0);
+        $("play").classList.add("active"); $("play").textContent = "Ⅱ Pause";
+        playTimer = setInterval(() => setFocus((selected + 1) % layers.length), release.timeline?.speed_ms || 800);
+      }
+
+      function buildScene() {
+        renderer = new THREE.WebGLRenderer({canvas: $("gl"), antialias: true});
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        renderer.setClearColor(0x08151b);
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(38, 1, .1, 200);
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; controls.dampingFactor = .08; controls.maxPolarAngle = Math.PI * .96;
+        controls.autoRotateSpeed = .8;
+        stack = new THREE.Group(); scene.add(stack);
+
+        const bounds = release.map.bounds;
+        const lonSpan = bounds[2] - bounds[0], latSpan = bounds[3] - bounds[1];
+        const midLat = (bounds[1] + bounds[3]) / 2;
+        const width = 10, height = width * latSpan / (lonSpan * Math.cos(midLat * Math.PI / 180));
+        const geometry = new THREE.PlaneGeometry(width, height); geometry.rotateX(-Math.PI / 2);
+        const frameGeometry = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(-width/2,0,-height/2), new THREE.Vector3(width/2,0,-height/2),
+          new THREE.Vector3(width/2,0,height/2), new THREE.Vector3(-width/2,0,height/2)
+        ]);
+        const transparentPixel = new Uint8Array([0,0,0,0]);
+        const loader = new THREE.TextureLoader(); loader.setCrossOrigin("anonymous");
+
+        release.entries.forEach((entry, index) => {
+          const placeholder = new THREE.DataTexture(transparentPixel, 1, 1); placeholder.needsUpdate = true;
+          const material = new THREE.MeshBasicMaterial({
+            map: placeholder, transparent: true, opacity: state.opacity, side: THREE.DoubleSide, depthWrite: false
+          });
+          const layer = new THREE.Mesh(geometry, material); layer.userData.index = index;
+          const colour = entry.kind === "forecast" ? FORECAST : HISTORY;
+          const frame = new THREE.LineLoop(frameGeometry, new THREE.LineBasicMaterial({color: colour, transparent: true, opacity: .9}));
+          const suffix = entry.kind === "forecast" ? `  Forecast +${entry.lead_weeks}` : "  Inpainted";
+          const label = makeLabel(entry.label + suffix, entry.kind === "forecast" ? "#f18b45" : "#39b8d6");
+          stack.add(layer, frame, label); layers.push(layer); frames.push(frame); labels.push(label);
+
+          loader.load(entry.preview_url, texture => {
+            texture.colorSpace = THREE.SRGBColorSpace;
+            material.map.dispose(); material.map = texture; material.needsUpdate = true;
+            loaded++; updateLoading();
+          }, undefined, () => {
+            failed++; loaded++; layer.visible = false; frame.visible = false; label.visible = false;
+            weekButtons[index]?.classList.add("failed"); updateLoading();
+          });
+        });
+
+        axisGroup = new THREE.Group(); stack.add(axisGroup);
+        const axisGeometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(0,1,0)]);
+        axisGroup.add(new THREE.Line(axisGeometry, new THREE.LineBasicMaterial({color: HISTORY, transparent: true, opacity: .8})));
+        layout(); homeView(); resize(); tick();
+      }
+
+      function updateLoading() {
+        const total = release.entries.length;
+        $("loading").textContent = loaded < total ? `Loading layers ${loaded}/${total}…` :
+          (failed ? `Loaded ${total - failed} layers; ${failed} failed.` : "All 14 layers loaded.");
+        if (loaded === total && failed) showError("Some previews could not be loaded. The remaining layers are still interactive.");
+      }
+
+      function buildUi() {
+        release.entries.forEach((entry, index) => {
+          const item = document.createElement("li"), button = document.createElement("button");
+          button.type = "button"; button.className = `week ${entry.kind}`;
+          button.innerHTML = `<span class="mark"></span><span>${entry.label}</span><small>${entry.kind === "forecast" ? `Forecast +${entry.lead_weeks}` : "Inpainted"}</small>`;
+          button.setAttribute("aria-pressed", "false");
+          button.addEventListener("click", () => setFocus(selected === index ? -1 : index));
+          item.appendChild(button); $("weeks").appendChild(item); weekButtons.push(button);
+        });
+        $("summary").textContent = `${release.history_weeks} past weeks below, ${release.forecast_weeks} forecast weeks above.`;
+        $("gap").addEventListener("input", event => {
+          state.gap = Number(event.target.value); $("gap-value").value = state.gap.toFixed(2); layout();
+        });
+        $("opacity").addEventListener("input", event => {
+          state.opacity = Number(event.target.value); $("opacity-value").value = state.opacity.toFixed(2); applyFocus();
+        });
+        $("frames").addEventListener("change", event => frames.forEach((frame, i) => frame.visible = event.target.checked && layers[i].visible));
+        $("rotate").addEventListener("change", event => controls.autoRotate = event.target.checked && !reducedMotion);
+        $("play").addEventListener("click", togglePlay);
+        $("show-all").addEventListener("click", () => { stopPlaying(); setFocus(-1); });
+        $("reset-view").addEventListener("click", homeView);
+        addEventListener("keydown", event => {
+          if (event.target.matches("input,button,a")) return;
+          if (event.key === " ") { event.preventDefault(); togglePlay(); }
+          else if (event.key === "Escape") { stopPlaying(); setFocus(-1); }
+          else if (event.key === "ArrowRight") setFocus((Math.max(selected, -1) + 1) % layers.length);
+          else if (event.key === "ArrowLeft") setFocus((selected <= 0 ? layers.length : selected) - 1);
+        });
+      }
+
+      function enableLayerClick() {
+        const ray = new THREE.Raycaster(), pointer = new THREE.Vector2();
+        let startX = 0, startY = 0;
+        renderer.domElement.addEventListener("pointerdown", event => { startX = event.clientX; startY = event.clientY; });
+        renderer.domElement.addEventListener("pointerup", event => {
+          if (Math.hypot(event.clientX - startX, event.clientY - startY) > 5) return;
+          pointer.x = event.clientX / innerWidth * 2 - 1; pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+          ray.setFromCamera(pointer, camera);
+          const hit = ray.intersectObjects(layers.filter(layer => layer.visible), false)[0];
+          if (hit) setFocus(selected === hit.object.userData.index ? -1 : hit.object.userData.index);
+        });
+      }
+
+      function resize() {
+        renderer.setSize(innerWidth, innerHeight, false);
+        camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+      }
+
+      function tick() {
+        requestAnimationFrame(tick); controls.update();
+        const above = camera.position.y > controls.target.y;
+        layers.forEach((layer, index) => layer.renderOrder = above ? index : layers.length - 1 - index);
+        renderer.render(scene, camera);
+      }
+
+      async function start() {
+        try {
+          const response = await fetch(`release.json?v=${Date.now()}`, {cache: "no-store"});
+          if (!response.ok) throw new Error(`release.json returned ${response.status}`);
+          release = await response.json();
+          if (release.schema_version < 2 || release.entries?.length !== 14 ||
+              release.history_weeks !== 10 || release.forecast_weeks !== 4) {
+            throw new Error("Expected a release containing 10 history and 4 forecast weeks.");
+          }
+          if (release.entries.some(entry => !entry.preview_url)) {
+            throw new Error("This release predates 3D previews. Run the publishing workflow again.");
+          }
+          buildUi(); buildScene(); enableLayerClick();
+          addEventListener("resize", resize);
+        } catch (error) {
+          $("summary").textContent = "The 3D view could not be started.";
+          showError(String(error));
+        }
+      }
+      start();
+    </script>
+  </body>
+</html>
