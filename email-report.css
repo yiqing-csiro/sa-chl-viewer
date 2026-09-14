@@ -11,6 +11,8 @@
 }
 
 .viewer-actions #view-3d,
+.viewer-actions #measure-distance,
+.viewer-actions #pixel-drill-toggle,
 .forecast-email-trigger {
   display: inline-flex;
   min-height: 28px;
@@ -30,6 +32,10 @@
 
 .viewer-actions #view-3d:hover,
 .viewer-actions #view-3d:focus-visible,
+.viewer-actions #measure-distance:hover,
+.viewer-actions #measure-distance:focus-visible,
+.viewer-actions #pixel-drill-toggle:hover,
+.viewer-actions #pixel-drill-toggle:focus-visible,
 .forecast-email-trigger:hover,
 .forecast-email-trigger:focus-visible {
   background: #0f5b74;
@@ -37,6 +43,15 @@
   outline-offset: 2px;
 }
 
+.viewer-actions #measure-distance[aria-pressed="true"],
+.viewer-actions #pixel-drill-toggle[aria-pressed="true"] {
+  background: #b84d00;
+  outline: 2px solid #f2ae75;
+  outline-offset: 2px;
+}
+
+.viewer-actions #measure-distance:disabled,
+.viewer-actions #pixel-drill-toggle:disabled,
 .forecast-email-trigger:disabled {
   color: #52656c;
   background: #d7e0e3;

@@ -28,16 +28,97 @@
       }
       h1 { margin: 0 0 5px; font-size: 18px; line-height: 1.25; }
       #summary { margin: 0; font-size: 13px; line-height: 1.4; }
+      .disclaimer {
+        margin-top: 8px; padding: 7px 9px; color: #5f4100; background: rgba(255,244,204,.92);
+        border: 1px solid #c58b12; border-radius: 6px; font-size: 10px; font-weight: 600; line-height: 1.4;
+      }
       #updated { margin-top: 5px; color: #536b74; font-size: 11px; }
-      #legend { right: 16px; bottom: 160px; width: 245px; padding: 10px 12px; }
+      #measurement-status {
+        margin: 7px 0 0; color: #29464f; font-size: 11px; font-weight: 700; line-height: 1.35;
+      }
+      #legend { right: 16px; bottom: 160px; width: 280px; padding: 10px 12px; }
       .legend-title { margin-bottom: 7px; font-size: 13px; font-weight: 700; }
       #colorbar { display: block; width: 100%; height: 18px; border-radius: 3px; }
       .ticks { display: flex; justify-content: space-between; margin-top: 3px; font-size: 10px; }
       .unit { margin-top: 4px; text-align: center; font-size: 11px; }
+      .color-scale-range { position: relative; height: 25px; margin: 6px 7px 2px; }
+      .color-scale-rail {
+        position: absolute; top: 11px; right: 0; left: 0; height: 4px; border-radius: 2px;
+        background: linear-gradient(to right, #aebdc2 0 var(--range-start), #168aad var(--range-start) var(--range-end), #aebdc2 var(--range-end) 100%);
+      }
+      .color-scale-range input[type="range"] {
+        position: absolute; inset: 0; width: 100%; height: 25px; margin: 0;
+        appearance: none; background: transparent; pointer-events: none;
+      }
+      .color-scale-range input[type="range"]:focus-visible { z-index: 3; outline: 2px solid #168aad; outline-offset: 2px; }
+      .color-scale-range input[type="range"]::-webkit-slider-runnable-track { height: 4px; background: transparent; }
+      .color-scale-range input[type="range"]::-webkit-slider-thumb {
+        width: 15px; height: 19px; margin-top: -8px; appearance: none; background: #fff;
+        border: 2px solid #176f8c; border-radius: 4px; box-shadow: 0 1px 3px rgba(16,39,48,.35); pointer-events: auto; cursor: ew-resize;
+      }
+      .color-scale-range input[type="range"]::-moz-range-track { height: 4px; background: transparent; border: 0; }
+      .color-scale-range input[type="range"]::-moz-range-thumb {
+        width: 12px; height: 16px; background: #fff; border: 2px solid #176f8c;
+        border-radius: 4px; box-shadow: 0 1px 3px rgba(16,39,48,.35); pointer-events: auto; cursor: ew-resize;
+      }
+      .color-scale-fields { display: grid; grid-template-columns: 1fr 1fr auto; align-items: end; gap: 6px; margin-top: 4px; }
+      .color-scale-fields label { display: grid; gap: 2px; color: #526970; font-size: 10px; font-weight: 700; }
+      .color-scale-fields input {
+        width: 100%; min-width: 0; padding: 5px 6px; color: #17313a; background: #fff;
+        border: 1px solid #91a8b0; border-radius: 4px; font: 12px Inter, Arial, sans-serif;
+      }
+      .color-scale-fields input:focus-visible { border-color: #168aad; outline: 2px solid #168aad; outline-offset: 1px; }
+      #color-scale-reset {
+        height: 28px; padding: 4px 8px; color: #17313a; background: #fff; border: 1px solid #91a8b0;
+        border-radius: 4px; font: 700 11px Inter, Arial, sans-serif; cursor: pointer;
+      }
+      #color-scale-reset:hover, #color-scale-reset:focus-visible { background: #e7f2f5; outline: 2px solid #168aad; outline-offset: 1px; }
+      #color-scale-error { margin: 5px 0 0; color: #a02020; font-size: 10px; line-height: 1.3; }
       .key { display: flex; gap: 12px; margin-top: 8px; font-size: 11px; }
       .key span::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; }
       .history::before { background: #168aad; }
       .forecast::before { background: #d95f02; }
+      #pixel-drill-panel {
+        z-index: 3; bottom: 160px; left: 16px; width: min(600px, calc(100vw - 330px));
+        padding: 12px 14px;
+      }
+      .pixel-drill-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+      .pixel-drill-header h2 { margin: 0; font-size: 15px; }
+      #pixel-drill-close {
+        flex: 0 0 auto; width: 28px; height: 28px; padding: 0; color: #526970; background: transparent;
+        border: 0; border-radius: 4px; font-size: 22px; line-height: 1; cursor: pointer;
+      }
+      #pixel-drill-close:hover, #pixel-drill-close:focus-visible { color: #17313a; background: #e7f2f5; outline: 2px solid #168aad; }
+      #pixel-drill-coordinate { margin: 3px 0 0; color: #526970; font-size: 11px; }
+      #pixel-drill-status { min-height: 16px; margin: 7px 0 5px; color: #35515b; font-size: 11px; }
+      .pixel-drill-key { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 3px; font-size: 11px; font-weight: 700; }
+      .pixel-drill-key span::before {
+        content: ""; display: inline-block; width: 18px; margin-right: 5px; border-top: 3px solid;
+        vertical-align: 3px;
+      }
+      .pixel-drill-key .pixel-history::before { border-color: #168aad; }
+      .pixel-drill-key .pixel-forecast::before { border-color: #d95f02; border-top-style: dashed; }
+      .pixel-drill-chart-wrap { position: relative; min-height: 245px; }
+      #pixel-drill-chart { display: block; width: 100%; height: auto; overflow: visible; }
+      #pixel-drill-chart .chart-grid { stroke: #cbd6da; stroke-width: 1; }
+      #pixel-drill-chart .chart-axis { fill: #526970; font: 10px Inter, Arial, sans-serif; }
+      #pixel-drill-chart .chart-boundary { stroke: #7d8e94; stroke-width: 1; stroke-dasharray: 4 4; }
+      #pixel-drill-chart .chart-history { fill: none; stroke: #168aad; stroke-width: 3; }
+      #pixel-drill-chart .chart-forecast { fill: none; stroke: #d95f02; stroke-width: 3; stroke-dasharray: 7 5; }
+      #pixel-drill-chart .chart-point { stroke: #fff; stroke-width: 1.5; cursor: help; }
+      #pixel-drill-chart .chart-point:focus { outline: none; stroke: #102b34; stroke-width: 3; }
+      #pixel-drill-chart .chart-current { fill: none; stroke: #102b34; stroke-width: 2; }
+      #pixel-drill-tooltip {
+        position: absolute; z-index: 2; max-width: 190px; padding: 6px 8px; color: #fff;
+        background: rgba(16,43,52,.94); border-radius: 5px; font-size: 10px; line-height: 1.35;
+        pointer-events: none; transform: translate(-50%, calc(-100% - 9px));
+      }
+      #pixel-drill-empty {
+        position: absolute; inset: 0; display: grid; place-items: center; color: #526970;
+        font-size: 12px; text-align: center;
+      }
+      #pixel-drill-panel[hidden], #pixel-drill-chart[hidden],
+      #pixel-drill-tooltip[hidden], #pixel-drill-empty[hidden] { display: none; }
       #timeline { right: 16px; bottom: 16px; left: 16px; padding: 10px 12px 9px; }
       .timeline-header { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
       .timeline-header button {
@@ -76,7 +157,13 @@
         .aquawatch-name { font-size: 8px; }
         h1 { font-size: 15px; }
         #summary { font-size: 11px; }
-        #legend { right: 8px; bottom: 174px; width: 205px; }
+        .disclaimer { margin-top: 6px; padding: 6px 7px; font-size: 9px; }
+        #legend { right: 8px; bottom: 174px; width: 240px; }
+        #pixel-drill-panel {
+          right: 8px; bottom: 174px; left: 8px; width: auto; max-height: 43vh;
+          padding: 10px 11px; overflow: auto;
+        }
+        .pixel-drill-chart-wrap { min-height: 205px; }
         #timeline { right: 8px; bottom: 8px; left: 8px; }
         #current-week { font-size: 12px; }
       }
@@ -94,10 +181,14 @@
           <h1>SA Coastal Chlorophyll Forecast</h1>
           <p id="summary">Loading the latest 10-week history and four-week forecast…</p>
           <div id="updated"></div>
+          <div class="disclaimer" role="note">DEVELOPMENT DEMO SITE — All data displayed are simulated using publicly available data sources and are provided for demonstration purposes only.</div>
           <div class="viewer-actions">
             <a id="view-3d" href="3d.html">Explore in 3D</a>
+            <button id="measure-distance" type="button" aria-pressed="false" disabled>Measure distance</button>
+            <button id="pixel-drill-toggle" type="button" aria-pressed="false" disabled>Pixel time series</button>
             <span data-forecast-email></span>
           </div>
+          <p id="measurement-status" role="status" aria-live="polite" hidden></p>
         </div>
       </div>
       <div id="error"></div>
@@ -105,9 +196,39 @@
     <section id="legend" class="card" aria-label="Chlorophyll colour scale">
       <div class="legend-title">Chlorophyll-a concentration</div>
       <canvas id="colorbar" width="600" height="36"></canvas>
-      <div class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
+      <div id="color-scale-ticks" class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
       <div class="unit">mg m<sup>−3</sup></div>
+      <div id="color-scale-range" class="color-scale-range">
+        <div class="color-scale-rail" aria-hidden="true"></div>
+        <input id="color-scale-min-range" type="range" step="0.1" aria-label="Minimum chlorophyll colour scale">
+        <input id="color-scale-max-range" type="range" step="0.1" aria-label="Maximum chlorophyll colour scale">
+      </div>
+      <div class="color-scale-fields">
+        <label>Min <input id="color-scale-min-number" type="number" inputmode="decimal" step="0.1"></label>
+        <label>Max <input id="color-scale-max-number" type="number" inputmode="decimal" step="0.1"></label>
+        <button id="color-scale-reset" type="button">Reset</button>
+      </div>
+      <p id="color-scale-error" role="alert" hidden></p>
       <div class="key"><span class="history">Historical</span><span class="forecast">Forecast</span></div>
+    </section>
+    <section id="pixel-drill-panel" class="card" aria-labelledby="pixel-drill-title" hidden>
+      <div class="pixel-drill-header">
+        <div>
+          <h2 id="pixel-drill-title">Pixel time series</h2>
+          <p id="pixel-drill-coordinate"></p>
+        </div>
+        <button id="pixel-drill-close" type="button" aria-label="Close pixel time series">×</button>
+      </div>
+      <p id="pixel-drill-status" role="status" aria-live="polite"></p>
+      <div class="pixel-drill-key" aria-label="Time series categories">
+        <span class="pixel-history">Historical · 10 weeks</span>
+        <span class="pixel-forecast">Forecast · 4 weeks</span>
+      </div>
+      <div class="pixel-drill-chart-wrap">
+        <svg id="pixel-drill-chart" viewBox="0 0 620 260" role="img" aria-label="Chlorophyll-a time series" hidden></svg>
+        <div id="pixel-drill-tooltip" role="tooltip" hidden></div>
+        <div id="pixel-drill-empty" hidden></div>
+      </div>
     </section>
     <section id="timeline" class="card" aria-label="Weekly chlorophyll timeline">
       <div class="timeline-header">
@@ -159,10 +280,505 @@
       const currentWeek = document.getElementById("current-week");
       const currentKind = document.getElementById("current-kind");
       const playButton = document.getElementById("play");
+      const measureButton = document.getElementById("measure-distance");
+      const measurementStatus = document.getElementById("measurement-status");
+      const pixelDrillButton = document.getElementById("pixel-drill-toggle");
+      const pixelDrillPanel = document.getElementById("pixel-drill-panel");
+      const pixelDrillClose = document.getElementById("pixel-drill-close");
+      const pixelDrillCoordinate = document.getElementById("pixel-drill-coordinate");
+      const pixelDrillStatus = document.getElementById("pixel-drill-status");
+      const pixelDrillChart = document.getElementById("pixel-drill-chart");
+      const pixelDrillTooltip = document.getElementById("pixel-drill-tooltip");
+      const pixelDrillEmpty = document.getElementById("pixel-drill-empty");
+      const colorScaleRange = document.getElementById("color-scale-range");
+      const colorScaleMinRange = document.getElementById("color-scale-min-range");
+      const colorScaleMaxRange = document.getElementById("color-scale-max-range");
+      const colorScaleMinNumber = document.getElementById("color-scale-min-number");
+      const colorScaleMaxNumber = document.getElementById("color-scale-max-number");
+      const colorScaleTicks = document.getElementById("color-scale-ticks");
+      const colorScaleReset = document.getElementById("color-scale-reset");
+      const colorScaleError = document.getElementById("color-scale-error");
       let release;
       let map;
       let selectedIndex = 0;
       let playTimer;
+      let activeTool = null;
+      let measurementPoints = [];
+      let pixelCoordinate;
+      let pixelSeries;
+      let pixelAbortController;
+      let scaleAllowedMinimum = 0;
+      let scaleAllowedMaximum = 50;
+      let scaleDefaultMinimum = 0;
+      let scaleDefaultMaximum = 20;
+      let scaleMinimum = 0;
+      let scaleMaximum = 20;
+      let tileRefreshTimer;
+
+      const EARTH_MEAN_RADIUS_METRES = 6371008.8;
+      const COLOR_SCALE_STEP = 0.1;
+      const TILE_REFRESH_DELAY_MS = 250;
+
+      function validRange(value, fallback) {
+        if (!Array.isArray(value) || value.length !== 2) return fallback;
+        const parsed = value.map(Number);
+        return parsed.every(Number.isFinite) && parsed[0] < parsed[1] ? parsed : fallback;
+      }
+
+      function formatScaleValue(value) {
+        const rounded = Math.round(value * 10) / 10;
+        return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+      }
+
+      function tileUrlForRange(tileUrl, minimum, maximum) {
+        const encodedRange = encodeURIComponent(`${formatScaleValue(minimum)},${formatScaleValue(maximum)}`);
+        const rescalePattern = /([?&])rescale=[^&]*/i;
+        if (rescalePattern.test(tileUrl)) {
+          return tileUrl.replace(rescalePattern, (_, separator) => `${separator}rescale=${encodedRange}`);
+        }
+        return `${tileUrl}${tileUrl.includes("?") ? "&" : "?"}rescale=${encodedRange}`;
+      }
+
+      function updateColorScaleControls() {
+        const minimumText = formatScaleValue(scaleMinimum);
+        const maximumText = formatScaleValue(scaleMaximum);
+        colorScaleMinRange.value = minimumText;
+        colorScaleMaxRange.value = maximumText;
+        colorScaleMinNumber.value = minimumText;
+        colorScaleMaxNumber.value = maximumText;
+        colorScaleMinRange.setAttribute("aria-valuetext", `${minimumText} milligrams per cubic metre`);
+        colorScaleMaxRange.setAttribute("aria-valuetext", `${maximumText} milligrams per cubic metre`);
+        const domain = scaleAllowedMaximum - scaleAllowedMinimum;
+        const start = 100 * (scaleMinimum - scaleAllowedMinimum) / domain;
+        const end = 100 * (scaleMaximum - scaleAllowedMinimum) / domain;
+        colorScaleRange.style.setProperty("--range-start", `${start}%`);
+        colorScaleRange.style.setProperty("--range-end", `${end}%`);
+        [...colorScaleTicks.children].forEach((tick, index, ticks) => {
+          tick.textContent = formatScaleValue(
+            scaleMinimum + (scaleMaximum - scaleMinimum) * index / (ticks.length - 1)
+          );
+        });
+      }
+
+      function updateChlorophyllTiles() {
+        clearTimeout(tileRefreshTimer);
+        tileRefreshTimer = undefined;
+        const source = map && map.getSource("chlorophyll");
+        if (!source || !release) return;
+        const entry = release.entries[selectedIndex];
+        source.setTiles([tileUrlForRange(entry.tile_url, scaleMinimum, scaleMaximum)]);
+      }
+
+      function scheduleTileRefresh(immediate = false) {
+        clearTimeout(tileRefreshTimer);
+        if (immediate) {
+          updateChlorophyllTiles();
+          return;
+        }
+        tileRefreshTimer = setTimeout(updateChlorophyllTiles, TILE_REFRESH_DELAY_MS);
+      }
+
+      function setColorScale(minimum, maximum, immediate = false) {
+        scaleMinimum = Math.round(minimum * 10) / 10;
+        scaleMaximum = Math.round(maximum * 10) / 10;
+        colorScaleError.hidden = true;
+        colorScaleError.textContent = "";
+        updateColorScaleControls();
+        scheduleTileRefresh(immediate);
+      }
+
+      function commitColorScaleNumbers() {
+        const minimum = Number(colorScaleMinNumber.value);
+        const maximum = Number(colorScaleMaxNumber.value);
+        const roundedMinimum = Math.round(minimum * 10) / 10;
+        const roundedMaximum = Math.round(maximum * 10) / 10;
+        if (!colorScaleMinNumber.value.trim() || !colorScaleMaxNumber.value.trim() ||
+            !Number.isFinite(minimum) || !Number.isFinite(maximum) ||
+            roundedMinimum < scaleAllowedMinimum || roundedMaximum > scaleAllowedMaximum ||
+            roundedMinimum >= roundedMaximum) {
+          colorScaleError.textContent =
+            `Enter a range from ${formatScaleValue(scaleAllowedMinimum)} to ${formatScaleValue(scaleAllowedMaximum)}, with Min below Max.`;
+          colorScaleError.hidden = false;
+          colorScaleMinNumber.value = formatScaleValue(scaleMinimum);
+          colorScaleMaxNumber.value = formatScaleValue(scaleMaximum);
+          return;
+        }
+        setColorScale(roundedMinimum, roundedMaximum, true);
+      }
+
+      function configureColorScale() {
+        [scaleAllowedMinimum, scaleAllowedMaximum] =
+          validRange(release.map.rescale_limits, [0, 50]);
+        const configuredDefault = validRange(release.map.rescale, [0, 20]);
+        scaleDefaultMinimum = Math.max(scaleAllowedMinimum, configuredDefault[0]);
+        scaleDefaultMaximum = Math.min(scaleAllowedMaximum, configuredDefault[1]);
+        if (scaleDefaultMaximum - scaleDefaultMinimum < COLOR_SCALE_STEP) {
+          scaleDefaultMinimum = scaleAllowedMinimum;
+          scaleDefaultMaximum = scaleAllowedMaximum;
+        }
+        for (const input of [
+          colorScaleMinRange, colorScaleMaxRange, colorScaleMinNumber, colorScaleMaxNumber
+        ]) {
+          input.min = scaleAllowedMinimum;
+          input.max = scaleAllowedMaximum;
+          input.step = COLOR_SCALE_STEP;
+        }
+        scaleMinimum = scaleDefaultMinimum;
+        scaleMaximum = scaleDefaultMaximum;
+        updateColorScaleControls();
+      }
+
+      function groundDistanceMeters(start, end) {
+        const toRadians = degrees => degrees * Math.PI / 180;
+        const startLatitude = toRadians(start[1]);
+        const endLatitude = toRadians(end[1]);
+        const latitudeDelta = endLatitude - startLatitude;
+        const longitudeDelta = toRadians(end[0] - start[0]);
+        const haversine = Math.sin(latitudeDelta / 2) ** 2 +
+          Math.cos(startLatitude) * Math.cos(endLatitude) *
+          Math.sin(longitudeDelta / 2) ** 2;
+        const clampedHaversine = Math.min(1, Math.max(0, haversine));
+        return 2 * EARTH_MEAN_RADIUS_METRES *
+          Math.atan2(Math.sqrt(clampedHaversine), Math.sqrt(1 - clampedHaversine));
+      }
+
+      function formatDistance(meters) {
+        return meters < 1000 ? `${Math.round(meters)} m` : `${(meters / 1000).toFixed(2)} km`;
+      }
+
+      function measurementGeoJson() {
+        const features = measurementPoints.map(coordinates => ({
+          type: "Feature",
+          properties: {},
+          geometry: {type: "Point", coordinates}
+        }));
+        if (measurementPoints.length === 2) {
+          features.unshift({
+            type: "Feature",
+            properties: {},
+            geometry: {type: "LineString", coordinates: measurementPoints}
+          });
+        }
+        return {type: "FeatureCollection", features};
+      }
+
+      function updateMeasurementLayer() {
+        const source = map && map.getSource("measurement");
+        if (source) source.setData(measurementGeoJson());
+      }
+
+      function showMeasurementStatus(message) {
+        measurementStatus.textContent = message;
+        measurementStatus.hidden = false;
+      }
+
+      function pixelDrillGeoJson() {
+        return {
+          type: "FeatureCollection",
+          features: pixelCoordinate ? [{
+            type: "Feature",
+            properties: {},
+            geometry: {type: "Point", coordinates: pixelCoordinate}
+          }] : []
+        };
+      }
+
+      function updatePixelDrillMarker() {
+        const source = map && map.getSource("pixel-drill");
+        if (source) source.setData(pixelDrillGeoJson());
+      }
+
+      function clearMeasurement() {
+        measurementPoints = [];
+        updateMeasurementLayer();
+        measurementStatus.hidden = true;
+        measurementStatus.textContent = "";
+      }
+
+      function clearPixelDrillResult() {
+        pixelAbortController?.abort();
+        pixelAbortController = undefined;
+        pixelCoordinate = undefined;
+        pixelSeries = undefined;
+        updatePixelDrillMarker();
+        pixelDrillPanel.hidden = true;
+        pixelDrillChart.hidden = true;
+        pixelDrillChart.replaceChildren();
+        pixelDrillTooltip.hidden = true;
+        pixelDrillEmpty.hidden = true;
+        pixelDrillEmpty.textContent = "";
+        pixelDrillStatus.textContent = "";
+        pixelDrillCoordinate.textContent = "";
+      }
+
+      function setActiveTool(tool) {
+        activeTool = tool;
+        const measuring = tool === "measure";
+        const drilling = tool === "pixel";
+        measureButton.setAttribute("aria-pressed", String(measuring));
+        pixelDrillButton.setAttribute("aria-pressed", String(drilling));
+        if (!measuring) clearMeasurement();
+        if (!drilling) clearPixelDrillResult();
+        if (measuring) showMeasurementStatus("Select a start point.");
+        if (map) map.getCanvas().style.cursor = tool ? "crosshair" : "";
+      }
+
+      function handleMeasurementClick(event) {
+        const coordinates = event.lngLat.toArray();
+        measurementPoints = measurementPoints.length === 2 ?
+          [coordinates] : [...measurementPoints, coordinates];
+        updateMeasurementLayer();
+        if (measurementPoints.length === 1) {
+          showMeasurementStatus("Select an end point.");
+          return;
+        }
+        const distance = groundDistanceMeters(measurementPoints[0], measurementPoints[1]);
+        showMeasurementStatus(`Distance: ${formatDistance(distance)}`);
+      }
+
+      function coordinateInsideBounds(coordinates) {
+        const [west, south, east, north] = release.map.bounds;
+        return coordinates[0] >= west && coordinates[0] <= east &&
+          coordinates[1] >= south && coordinates[1] <= north;
+      }
+
+      function pointUrlForEntry(entry, coordinates) {
+        let template = entry.point_url;
+        if (!template) {
+          const cogPath = entry.tile_url.indexOf("/cog/");
+          if (cogPath < 0) throw new Error("The TiTiler endpoint could not be determined.");
+          const endpoint = entry.tile_url.slice(0, cogPath);
+          template = `${endpoint}/cog/point/{lon},{lat}?url=${encodeURIComponent(entry.url)}&bidx=1&nodata=-9999`;
+        }
+        const longitude = coordinates[0].toFixed(6);
+        const latitude = coordinates[1].toFixed(6);
+        return template.replace("{lon}", longitude).replace("{lat}", latitude);
+      }
+
+      async function fetchPixelValue(entry, coordinates, signal) {
+        const response = await fetch(pointUrlForEntry(entry, coordinates), {signal});
+        if (!response.ok) throw new Error(`Point request returned ${response.status}`);
+        const payload = await response.json();
+        const rawValue = payload.values?.[0];
+        if (rawValue === null || rawValue === undefined) return null;
+        const value = Number(rawValue);
+        return Number.isFinite(value) && value >= 0 && value !== -9999 ? value : null;
+      }
+
+      function formatPixelValue(value) {
+        return value < 1 ? value.toFixed(3) : value.toFixed(2);
+      }
+
+      function chartDate(date) {
+        return new Date(`${date}T00:00:00Z`).toLocaleDateString("en-AU", {
+          day: "2-digit", month: "short", timeZone: "UTC"
+        });
+      }
+
+      function svgElement(name, attributes = {}, text) {
+        const element = document.createElementNS("http://www.w3.org/2000/svg", name);
+        for (const [key, value] of Object.entries(attributes)) {
+          element.setAttribute(key, value);
+        }
+        if (text !== undefined) element.textContent = text;
+        return element;
+      }
+
+      function seriesPath(points, xPosition, yPosition) {
+        let drawing = false;
+        const commands = [];
+        for (const point of points) {
+          if (!Number.isFinite(point.value)) {
+            drawing = false;
+            continue;
+          }
+          commands.push(`${drawing ? "L" : "M"} ${xPosition(point.index)} ${yPosition(point.value)}`);
+          drawing = true;
+        }
+        return commands.join(" ");
+      }
+
+      function hidePixelTooltip() {
+        pixelDrillTooltip.hidden = true;
+      }
+
+      function showPixelTooltip(point, x, y) {
+        const kind = point.entry.kind === "forecast" ? "Forecast" : "Historical";
+        pixelDrillTooltip.textContent =
+          `${point.entry.label} · ${kind} · ${formatPixelValue(point.value)} mg/m³`;
+        const bounds = pixelDrillChart.getBoundingClientRect();
+        pixelDrillTooltip.style.left = `${x / 620 * bounds.width}px`;
+        pixelDrillTooltip.style.top = `${y / 260 * bounds.height}px`;
+        pixelDrillTooltip.hidden = false;
+      }
+
+      function renderPixelChart(series) {
+        pixelDrillChart.replaceChildren();
+        pixelDrillTooltip.hidden = true;
+        const values = series.map(point => point.value).filter(Number.isFinite);
+        if (!values.length) {
+          pixelDrillChart.hidden = true;
+          pixelDrillEmpty.textContent = "No data at this location.";
+          pixelDrillEmpty.hidden = false;
+          return;
+        }
+
+        pixelDrillEmpty.hidden = true;
+        pixelDrillChart.hidden = false;
+        const width = 620;
+        const height = 260;
+        const margin = {top: 20, right: 18, bottom: 55, left: 52};
+        const plotWidth = width - margin.left - margin.right;
+        const plotHeight = height - margin.top - margin.bottom;
+        const xPosition = index => margin.left + plotWidth * index / (series.length - 1);
+        const maximum = Math.max(...values);
+        const yMaximum = maximum > 0 ? maximum * 1.1 : 1;
+        const yPosition = value => margin.top + plotHeight * (1 - value / yMaximum);
+        const historyCount = release.history_weeks;
+        const boundary = (xPosition(historyCount - 1) + xPosition(historyCount)) / 2;
+
+        pixelDrillChart.append(
+          svgElement("rect", {
+            x: margin.left, y: margin.top, width: boundary - margin.left,
+            height: plotHeight, fill: "#168aad", opacity: "0.045"
+          }),
+          svgElement("rect", {
+            x: boundary, y: margin.top, width: margin.left + plotWidth - boundary,
+            height: plotHeight, fill: "#d95f02", opacity: "0.05"
+          })
+        );
+
+        for (let tick = 0; tick <= 4; tick++) {
+          const value = yMaximum * tick / 4;
+          const y = yPosition(value);
+          pixelDrillChart.append(
+            svgElement("line", {
+              x1: margin.left, y1: y, x2: margin.left + plotWidth, y2: y,
+              class: "chart-grid"
+            }),
+            svgElement("text", {
+              x: margin.left - 8, y: y + 3, "text-anchor": "end", class: "chart-axis"
+            }, value < 1 ? value.toFixed(2) : value.toFixed(1))
+          );
+        }
+
+        series.forEach((point, index) => {
+          if (index % 2 !== 0 && index !== series.length - 1) return;
+          const x = xPosition(index);
+          const y = margin.top + plotHeight + 17;
+          pixelDrillChart.append(svgElement("text", {
+            x, y, "text-anchor": "end", class: "chart-axis",
+            transform: `rotate(-35 ${x} ${y})`
+          }, chartDate(point.entry.date)));
+        });
+
+        pixelDrillChart.append(
+          svgElement("line", {
+            x1: boundary, y1: margin.top, x2: boundary, y2: margin.top + plotHeight,
+            class: "chart-boundary"
+          }),
+          svgElement("text", {
+            x: 13, y: margin.top + plotHeight / 2, "text-anchor": "middle",
+            class: "chart-axis", transform: `rotate(-90 13 ${margin.top + plotHeight / 2})`
+          }, "Chlorophyll-a (mg/m³)")
+        );
+
+        const historical = series.slice(0, historyCount);
+        const forecast = [series[historyCount - 1], ...series.slice(historyCount)];
+        const historicalPath = seriesPath(historical, xPosition, yPosition);
+        const forecastPath = seriesPath(forecast, xPosition, yPosition);
+        if (historicalPath) {
+          pixelDrillChart.append(svgElement("path", {d: historicalPath, class: "chart-history"}));
+        }
+        if (forecastPath) {
+          pixelDrillChart.append(svgElement("path", {d: forecastPath, class: "chart-forecast"}));
+        }
+
+        for (const point of series) {
+          if (!Number.isFinite(point.value)) continue;
+          const x = xPosition(point.index);
+          const y = yPosition(point.value);
+          if (point.index === selectedIndex) {
+            pixelDrillChart.append(svgElement("circle", {
+              cx: x, cy: y, r: 8, class: "chart-current"
+            }));
+          }
+          const kind = point.entry.kind === "forecast" ? "Forecast" : "Historical";
+          const circle = svgElement("circle", {
+            cx: x, cy: y, r: 4.5,
+            fill: point.entry.kind === "forecast" ? "#d95f02" : "#168aad",
+            class: "chart-point", tabindex: "0", role: "img",
+            "aria-label": `${point.entry.label}, ${kind}, ${formatPixelValue(point.value)} milligrams per cubic metre`
+          });
+          circle.append(svgElement("title", {},
+            `${point.entry.label} · ${kind} · ${formatPixelValue(point.value)} mg/m³`
+          ));
+          circle.addEventListener("pointerenter", () => showPixelTooltip(point, x, y));
+          circle.addEventListener("pointerleave", hidePixelTooltip);
+          circle.addEventListener("focus", () => showPixelTooltip(point, x, y));
+          circle.addEventListener("blur", hidePixelTooltip);
+          pixelDrillChart.append(circle);
+        }
+
+        pixelDrillChart.setAttribute(
+          "aria-label",
+          `Chlorophyll-a time series with ${historyCount} historical and ${release.forecast_weeks} forecast weeks`
+        );
+      }
+
+      async function handlePixelDrillClick(event) {
+        pixelAbortController?.abort();
+        const coordinates = event.lngLat.toArray();
+        pixelCoordinate = coordinates;
+        pixelSeries = undefined;
+        updatePixelDrillMarker();
+        pixelDrillPanel.hidden = false;
+        pixelDrillCoordinate.textContent =
+          `Lat ${coordinates[1].toFixed(4)}°, Lon ${coordinates[0].toFixed(4)}°`;
+        pixelDrillChart.hidden = true;
+        pixelDrillChart.replaceChildren();
+        pixelDrillTooltip.hidden = true;
+        pixelDrillEmpty.hidden = true;
+
+        if (!coordinateInsideBounds(coordinates)) {
+          pixelAbortController = undefined;
+          pixelDrillStatus.textContent = "The selected point is outside the data bounds.";
+          pixelDrillEmpty.textContent = "No data at this location.";
+          pixelDrillEmpty.hidden = false;
+          return;
+        }
+
+        pixelDrillStatus.textContent = "Loading 14 weekly pixel values…";
+        const controller = new AbortController();
+        pixelAbortController = controller;
+        const results = await Promise.allSettled(
+          release.entries.map(entry => fetchPixelValue(entry, coordinates, controller.signal))
+        );
+        if (controller.signal.aborted) return;
+        pixelAbortController = undefined;
+        pixelSeries = results.map((result, index) => ({
+          index,
+          entry: release.entries[index],
+          value: result.status === "fulfilled" ? result.value : null,
+          failed: result.status === "rejected"
+        }));
+        const available = pixelSeries.filter(point => Number.isFinite(point.value)).length;
+        const failed = pixelSeries.filter(point => point.failed).length;
+        if (!available) {
+          pixelDrillStatus.textContent = failed ?
+            "No data could be loaded at this location." : "No data at this location.";
+        } else {
+          pixelDrillStatus.textContent =
+            `${available} of ${pixelSeries.length} weekly values available${failed ? `; ${failed} request${failed === 1 ? "" : "s"} failed` : ""}.`;
+        }
+        renderPixelChart(pixelSeries);
+      }
+
+      function handleMapClick(event) {
+        if (activeTool === "measure") handleMeasurementClick(event);
+        if (activeTool === "pixel") void handlePixelDrillClick(event);
+      }
+
 
       function selectFrame(index) {
         selectedIndex = Math.max(0, Math.min(release.entries.length - 1, Number(index)));
@@ -176,7 +792,10 @@
           button.setAttribute("aria-current", position === selectedIndex ? "date" : "false");
         });
         const source = map && map.getSource("chlorophyll");
-        if (source) source.setTiles([entry.tile_url]);
+        if (source) {
+          source.setTiles([tileUrlForRange(entry.tile_url, scaleMinimum, scaleMaximum)]);
+        }
+        if (pixelSeries) renderPixelChart(pixelSeries);
         positionTimelineIndicator();
       }
 
@@ -236,6 +855,7 @@
           if (release.schema_version < 2 || release.entries.length !== 14) {
             throw new Error("Expected a schema v2 release with 14 weekly frames");
           }
+          configureColorScale();
 
           slider.max = release.entries.length - 1;
           selectedIndex = Math.max(0, release.history_weeks - 1);
@@ -262,13 +882,81 @@
             const initial = release.entries[selectedIndex];
             map.addSource("chlorophyll", {
               type: "raster",
-              tiles: [initial.tile_url],
+              tiles: [tileUrlForRange(initial.tile_url, scaleMinimum, scaleMaximum)],
               tileSize: 256,
               bounds: release.map.bounds
             });
             map.addLayer({id: "chlorophyll", type: "raster", source: "chlorophyll"});
+            map.addSource("measurement", {
+              type: "geojson",
+              data: measurementGeoJson()
+            });
+            map.addLayer({
+              id: "measurement-line",
+              type: "line",
+              source: "measurement",
+              filter: ["==", ["geometry-type"], "LineString"],
+              paint: {
+                "line-color": "#ffbf00",
+                "line-width": 3,
+                "line-opacity": 0.95
+              }
+            });
+            map.addLayer({
+              id: "measurement-points",
+              type: "circle",
+              source: "measurement",
+              filter: ["==", ["geometry-type"], "Point"],
+              paint: {
+                "circle-radius": 6,
+                "circle-color": "#ffffff",
+                "circle-stroke-color": "#b84d00",
+                "circle-stroke-width": 3
+              }
+            });
+            map.addSource("pixel-drill", {
+              type: "geojson",
+              data: pixelDrillGeoJson()
+            });
+            map.addLayer({
+              id: "pixel-drill-point",
+              type: "circle",
+              source: "pixel-drill",
+              paint: {
+                "circle-radius": 7,
+                "circle-color": "#ffffff",
+                "circle-stroke-color": "#7b1fa2",
+                "circle-stroke-width": 3
+              }
+            });
+            map.on("click", handleMapClick);
+            measureButton.disabled = false;
+            pixelDrillButton.disabled = false;
           });
 
+          colorScaleMinRange.addEventListener("input", event => {
+            const minimum = Math.min(Number(event.target.value), scaleMaximum - COLOR_SCALE_STEP);
+            setColorScale(minimum, scaleMaximum);
+          });
+          colorScaleMaxRange.addEventListener("input", event => {
+            const maximum = Math.max(Number(event.target.value), scaleMinimum + COLOR_SCALE_STEP);
+            setColorScale(scaleMinimum, maximum);
+          });
+          colorScaleMinRange.addEventListener("change", () => scheduleTileRefresh(true));
+          colorScaleMaxRange.addEventListener("change", () => scheduleTileRefresh(true));
+          colorScaleMinNumber.addEventListener("change", commitColorScaleNumbers);
+          colorScaleMaxNumber.addEventListener("change", commitColorScaleNumbers);
+          for (const input of [colorScaleMinNumber, colorScaleMaxNumber]) {
+            input.addEventListener("keydown", event => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                commitColorScaleNumbers();
+              }
+            });
+          }
+          colorScaleReset.addEventListener("click", () => {
+            setColorScale(scaleDefaultMinimum, scaleDefaultMaximum, true);
+          });
           slider.addEventListener("input", event => selectFrame(event.target.value));
           timelineRange.addEventListener("pointerdown", event => {
             event.preventDefault();
@@ -292,6 +980,13 @@
           document.getElementById("previous").addEventListener("click", () => selectFrame(selectedIndex - 1));
           document.getElementById("next").addEventListener("click", () => selectFrame(selectedIndex + 1));
           playButton.addEventListener("click", togglePlaying);
+          measureButton.addEventListener("click", () => {
+            setActiveTool(activeTool === "measure" ? null : "measure");
+          });
+          pixelDrillButton.addEventListener("click", () => {
+            setActiveTool(activeTool === "pixel" ? null : "pixel");
+          });
+          pixelDrillClose.addEventListener("click", () => setActiveTool(null));
           selectFrame(selectedIndex);
           document.getElementById("summary").textContent =
             `${release.history_weeks} past weeks and ${release.forecast_weeks} forecast weeks.`;

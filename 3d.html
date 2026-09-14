@@ -32,6 +32,10 @@
       h1 { margin: 0 0 4px; font-size: 18px; line-height: 1.2; }
       #summary, #loading { color: var(--muted); font-size: 12px; line-height: 1.45; }
       #loading { margin-top: 5px; }
+      .disclaimer {
+        margin-top: 8px; padding: 7px 9px; color: #ffe7a3; background: rgba(102,70,7,.72);
+        border: 1px solid #d8a52f; border-radius: 6px; font-size: 10px; font-weight: 600; line-height: 1.4;
+      }
       #error { display: none; margin-top: 6px; color: #ffaaa1; font-size: 12px; }
       #back {
         top: 16px; right: 16px; padding: 8px 11px; color: var(--text); text-decoration: none;
@@ -74,6 +78,7 @@
       .key .forecast i { background: var(--forecast); }
       #hint { top: 100px; right: 16px; color: var(--muted); font-size: 11px; line-height: 1.6; text-align: right; pointer-events: none; }
       @media (max-width: 720px) {
+        .disclaimer { margin-top: 6px; padding: 6px 7px; font-size: 9px; }
         #title { top: 8px; left: 8px; width: calc(100vw - 112px); padding: 9px 10px; }
         #logo { width: 38px; height: 38px; } h1 { font-size: 14px; }
         .aquawatch-name { font-size: 7px; }
@@ -99,6 +104,7 @@
           <div id="summary">Loading the latest release…</div>
           <div id="loading"></div>
           <div id="error"></div>
+          <div class="disclaimer" role="note">DEVELOPMENT DEMO SITE — All data displayed are simulated using publicly available data sources and are provided for demonstration purposes only.</div>
           <div class="viewer-actions"><span data-forecast-email></span></div>
         </div>
       </div>
