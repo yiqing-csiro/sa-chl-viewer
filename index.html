@@ -505,7 +505,7 @@
         pixelSeries = undefined;
         updatePixelDrillMarker();
         pixelDrillPanel.hidden = true;
-        pixelDrillChart.hidden = true;
+        pixelDrillChart.setAttribute("hidden", "");
         pixelDrillChart.replaceChildren();
         pixelDrillTooltip.hidden = true;
         pixelDrillEmpty.hidden = true;
@@ -620,14 +620,14 @@
         pixelDrillTooltip.hidden = true;
         const values = series.map(point => point.value).filter(Number.isFinite);
         if (!values.length) {
-          pixelDrillChart.hidden = true;
+          pixelDrillChart.setAttribute("hidden", "");
           pixelDrillEmpty.textContent = "No data at this location.";
           pixelDrillEmpty.hidden = false;
           return;
         }
 
         pixelDrillEmpty.hidden = true;
-        pixelDrillChart.hidden = false;
+        pixelDrillChart.removeAttribute("hidden");
         const width = 620;
         const height = 260;
         const margin = {top: 20, right: 18, bottom: 55, left: 52};
@@ -738,7 +738,7 @@
         pixelDrillPanel.hidden = false;
         pixelDrillCoordinate.textContent =
           `Lat ${coordinates[1].toFixed(4)}°, Lon ${coordinates[0].toFixed(4)}°`;
-        pixelDrillChart.hidden = true;
+        pixelDrillChart.setAttribute("hidden", "");
         pixelDrillChart.replaceChildren();
         pixelDrillTooltip.hidden = true;
         pixelDrillEmpty.hidden = true;
