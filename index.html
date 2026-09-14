@@ -99,7 +99,9 @@
       .pixel-drill-key .pixel-history::before { border-color: #168aad; }
       .pixel-drill-key .pixel-forecast::before { border-color: #d95f02; border-top-style: dashed; }
       .pixel-drill-chart-wrap { position: relative; min-height: 245px; }
-      #pixel-drill-chart { display: block; width: 100%; height: auto; overflow: visible; }
+      #pixel-drill-chart {
+        display: block; width: 100%; height: auto; aspect-ratio: 620 / 260; overflow: visible;
+      }
       #pixel-drill-chart .chart-grid { stroke: #cbd6da; stroke-width: 1; }
       #pixel-drill-chart .chart-axis { fill: #526970; font: 10px Inter, Arial, sans-serif; }
       #pixel-drill-chart .chart-boundary { stroke: #7d8e94; stroke-width: 1; stroke-dasharray: 4 4; }
@@ -225,7 +227,8 @@
         <span class="pixel-forecast">Forecast · 4 weeks</span>
       </div>
       <div class="pixel-drill-chart-wrap">
-        <svg id="pixel-drill-chart" viewBox="0 0 620 260" role="img" aria-label="Chlorophyll-a time series" hidden></svg>
+        <svg id="pixel-drill-chart" viewBox="0 0 620 260" width="620" height="260"
+          preserveAspectRatio="xMidYMid meet" role="img" aria-label="Chlorophyll-a time series" hidden></svg>
         <div id="pixel-drill-tooltip" role="tooltip" hidden></div>
         <div id="pixel-drill-empty" hidden></div>
       </div>
