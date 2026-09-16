@@ -6,7 +6,7 @@
     <meta name="description" content="South Australian coastal chlorophyll history and forecast">
     <title>SA Coastal Chlorophyll Forecast</title>
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.8.0/dist/maplibre-gl.css">
-    <link rel="stylesheet" href="email-report.css">
+    <link rel="stylesheet" href="viewer-actions.css">
     <style>
       :root { color-scheme: light; font-family: Inter, Arial, sans-serif; }
       * { box-sizing: border-box; }
@@ -188,7 +188,6 @@
             <a id="view-3d" href="3d.html">Explore in 3D</a>
             <button id="measure-distance" type="button" aria-pressed="false" disabled>Measure distance</button>
             <button id="pixel-drill-toggle" type="button" aria-pressed="false" disabled>Pixel time series</button>
-            <span data-forecast-email></span>
           </div>
           <p id="measurement-status" role="status" aria-live="polite" hidden></p>
         </div>
@@ -1004,6 +1003,5 @@
       }
       start();
     </script>
-    <script type="module" src="email-report.js"></script>
   </body>
 </html>

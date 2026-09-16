@@ -1,0 +1,51 @@
+.viewer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.viewer-actions #view-3d,
+.viewer-actions #measure-distance,
+.viewer-actions #pixel-drill-toggle {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 6px 10px;
+  color: #fff;
+  background: #176f8c;
+  border: 0;
+  border-radius: 5px;
+  font: 700 12px Inter, Arial, sans-serif;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.viewer-actions #view-3d:hover,
+.viewer-actions #view-3d:focus-visible,
+.viewer-actions #measure-distance:hover,
+.viewer-actions #measure-distance:focus-visible,
+.viewer-actions #pixel-drill-toggle:hover,
+.viewer-actions #pixel-drill-toggle:focus-visible {
+  background: #0f5b74;
+  outline: 2px solid #39b8d6;
+  outline-offset: 2px;
+}
+
+.viewer-actions #measure-distance[aria-pressed="true"],
+.viewer-actions #pixel-drill-toggle[aria-pressed="true"] {
+  background: #b84d00;
+  outline: 2px solid #f2ae75;
+  outline-offset: 2px;
+}
+
+.viewer-actions #measure-distance:disabled,
+.viewer-actions #pixel-drill-toggle:disabled {
+  color: #52656c;
+  background: #d7e0e3;
+  cursor: not-allowed;
+}
